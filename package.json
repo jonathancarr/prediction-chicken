@@ -1,0 +1,25 @@
+{
+  "name": "prediction-chicken",
+  "version": "1.0.0",
+  "description": "Predictions for Mitre 10 Cup Rugby Games",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.30",
+    "node-calendar": "^0.1.4",
+    "table-scraper": "^0.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.2.0",
+    "gulp-nodemon": "^2.2.1",
+    "wiredep": "^4.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Jonathan Carr",
+  "license": "ISC"
+}
