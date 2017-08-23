@@ -130,11 +130,14 @@ var predictMargins = function(fixtures, teams){
 		game.predictTeam = predictTeam;
 		game.predictScore = predictScore;
 		//If game has been completed, compare prediciton with outcome and change ratings.
-		if(game.homeScore != 0 && game.awayScore != 0){
+		if(game.homeScore != 0 || game.awayScore != 0){
 			var actualMargin = game.homeScore - game.awayScore;
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
+			if(game.homeScore - game.awayScore == Math.round(prediction)){
+				console.log(game);
+			}
 		}
 		
 	}
