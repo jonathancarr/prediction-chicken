@@ -43,7 +43,6 @@ var getTeams = function(query, callback){
 //Query database and return a list of games
 var getGames = function(query, callback){
 	dbManager.getGames(query, function(results){
-		console.log(results);
 		//Sort based on date/time
 		results.sort(function(a, b) {
 			return (+a.year*365 + a.month*31 + a.day + a.hour/24.0|| 0) - (+b.year*365 + b.month*31 + b.day + b.hour/24 || 0);
@@ -61,11 +60,65 @@ var getGames = function(query, callback){
 				venue: r.venue,
 				homeScore: r.homeScore,
 				awayScore: r.awayScore,
+				prediction: r.prediction,
 				predictTeam: r.predictTeam,
 				predictMargin: r.predictScore
 			});
 		}
 		callback(games);
+	});
+}
+
+var getStats = function(query, callback){
+	var weeklyCorrect = {};
+	var weeklyTotal = {};
+	dbManager.getGames(query, function(games){
+		var numGames = 0;
+		var gamesCorrect = 0;
+		var marginDiff = 0;
+		for(var i = 0; i < games.length; i++){
+			if(weeklyCorrect[games[i].week] == null){
+				weeklyCorrect[games[i].week] = 0;
+			}
+			if(weeklyTotal[games[i].week] == null){
+				weeklyTotal[games[i].week] = 0;
+			}
+			if(games[i].homeScore != 0 || games[i].awayScore != 0){
+				weeklyTotal[games[i].week] = weeklyTotal[games[i].week] + 1;
+				numGames++;
+				if(parseFloat(games[i].prediction)>0){
+					if(parseInt(games[i].homeScore) > parseInt(games[i].awayScore)){
+						gamesCorrect++;
+						weeklyCorrect[games[i].week] = weeklyCorrect[games[i].week] + 1;
+					}
+				}else{
+					if(parseInt(games[i].homeScore) < parseInt(games[i].awayScore)){
+						gamesCorrect++;
+						weeklyCorrect[games[i].week] = weeklyCorrect[games[i].week] + 1;
+					}
+				}
+				marginDiff += Math.abs(games[i].prediction - (games[i].homeScore - games[i].awayScore));
+			}
+		}
+		var labels = [];
+		var data = [];
+		for(var i = 1; i <= 9; i++){
+			labels.push('Week ' + i);
+			if(weeklyCorrect[i] == 0){
+					data.push(0);
+			}else{
+				data.push(Math.round(weeklyCorrect[i]/weeklyTotal[i]*1000)/10);
+			}
+		}
+		var graph = {
+			labels: labels,
+			data:data
+		}
+		callback({
+			win: Math.round(gamesCorrect/numGames*100 * 10)/10,
+			margin: Math.round(marginDiff/numGames*10)/10,
+			graph: graph
+		});
 	});
 }
 
@@ -78,7 +131,7 @@ var getDayString = function(day){
 //Get string from month int value
 var getMonthString = function(i){
 	var monthStrings = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	return monthStrings[i]; 
+	return monthStrings[i];
 }
 
 //Load teams into database
@@ -100,8 +153,8 @@ var predictMargins = function(fixtures, teams){
 	fixtures.sort(function(a, b) {
 		return (+a.year*365 + a.month*31 + a.day || 0) - (+b.year*365 + b.month*31 + b.day || 0);
 	});
-	
-	//Values for determining rating changes. These were one calculated by running simulations 
+
+	//Values for determining rating changes. These were one calculated by running simulations
 	var ratingPerPoint = 25;
 	var ratingChangePerPoint = 2.5;
 	var homeAdvantage = 2;
@@ -127,6 +180,7 @@ var predictMargins = function(fixtures, teams){
 		}else{
 			predictScore = Math.round(predictScore);
 		}
+		game.prediction = prediction;
 		game.predictTeam = predictTeam;
 		game.predictScore = predictScore;
 		//If game has been completed, compare prediciton with outcome and change ratings.
@@ -135,11 +189,9 @@ var predictMargins = function(fixtures, teams){
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
-			if(game.homeScore - game.awayScore == Math.round(prediction)){
-				console.log(game);
-			}
+
 		}
-		
+
 	}
 	//Round ratings
 	for(var i = 0; i < teams.length; i++){
@@ -150,12 +202,12 @@ var predictMargins = function(fixtures, teams){
 	dbManager.updateGames(fixtures);
 }
 
-//Update the chicken. Scrape results then predict marings. 
+//Update the chicken. Scrape results then predict marings.
 var update = function(){
 	console.log("Updating Chicken:")
 	dbManager.getTeams({}, function(teams, fixturesUrls){
 		var fixturesUrls = [
-			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Itm2015', Year: 2015},	
+			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Itm2015', Year: 2015},
 			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2016', Year: 2016 },
 			{Url: 'http://www.mitre10cup.co.nz/Fixtures', Year: 2017}
 		];
@@ -170,6 +222,7 @@ var getPredictionChicken = function(){
 	chicken.update = update;
 	chicken.predictMargins = predictMargins;
 	chicken.loadTeams = loadTeams;
+	chicken.getStats = getStats;
 	return chicken;
 }
 module.exports = getPredictionChicken;

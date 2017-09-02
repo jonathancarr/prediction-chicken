@@ -1,56 +1,70 @@
 [{
 	"team": "Canterbury",
-	"conference": "Premiership"
+	"conference": "Premiership",
+	"colour": "#9F0B00"
 },
 {
 	"team": "Counties Manukau",
-	"conference": "Premiership"
+	"conference": "Premiership",
+	"colour": "#E00034:"
 },
 {
 	"team": "Taranaki",
-	"conference": "Premiership"
+	"conference": "Premiership",
+	"colour": "#FAB019"
 },
 {
 	"team": "Tasman",
-	"conference": "Premiership"
+	"conference": "Premiership",
+	"colour": "#CC2043"
 },
 {
 	"team": "Waikato",
-	"conference": "Premiership"
+	"conference": "Premiership",
+	"colour": "#F9B208"
 },
 {
 	"team": "Auckland",
-	"conference": "Premiership"
+	"conference": "Premiership",
+	"colour": "#"
 },
 {
 	"team": "Bay of Plenty",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "Wellington",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "Manawatu",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "North Harbour",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "Northland",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "Otago",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "Southland",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 },
 {
 	"team": "Hawke’s Bay",
-	"conference": "Championship"
+	"conference": "Championship",
+	"colour": "#FAB019"
 }]

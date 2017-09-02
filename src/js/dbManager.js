@@ -5,10 +5,9 @@ var url = 'mongodb://localhost:27017/predictionChicken';
 var getGames = function(query, func){
 	mongodb.connect(url, function(err, db){
 		var collection = db.collection('fixtures');
-		console.log(query);
 		var result = collection.find(query).toArray(function(err, results){
-			console.log(results);
 			func(results);
+			db.close();
 		});
 	});
 }
@@ -19,6 +18,7 @@ var getTeams = function(query, func){
 		var collection = db.collection('teams');
 		var result = collection.find(query).toArray(function(err, results){
 			func(results);
+			db.close();
 		});
 	});
 }
@@ -30,6 +30,7 @@ var updateTeams = function(teams, callback){
 		var collection = db.collection('teams');
 		collection.removeMany({}, function(){
 			collection.insertMany(teams, callback);
+			db.close();
 		})
 	});
 }
@@ -42,6 +43,7 @@ var updateGames = function(fixtures){
 		collection.remove({}, function(){
 			collection.insertMany(fixtures, function(){
 				console.log("... Done");
+				db.close();
 			});
 		});
 	});
