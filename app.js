@@ -3,7 +3,7 @@ var app = express();
 
 var chicken = require('./src/js/predictionChicken')();
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 8080;
 
 
 var teams = require('./src/json/teams.json');
@@ -12,10 +12,21 @@ var teams = require('./src/json/teams.json');
 var nav = [{
 		Link: '/week/1',
 		Text: 'Match Predictions'
-	}, 
+	},
 	{
-		Link: '/ratings',
-		Text: 'Team Ratings'
+		Text: 'Team Ratings',
+		Dropdown: [{
+			Text: 'Championship',
+			Link: '/championship'
+		},
+		{
+			Text: 'Premiership',
+			Link: '/premiership'
+		}]
+	},
+	{
+		Link: '/stats',
+		Text: 'Statistics'
 	}
 ];
 var router = require('./src/js/router')(nav);
@@ -33,7 +44,7 @@ app.listen(port, function(err){
 var updateTimer = 10000
 //scrape web for results and update chicken every 10,000ms
 var updateChicken = function(){
-	chicken.update();	
+	chicken.update();
 	setTimeout(function(){
 		updateChicken();
 	}, updateTimer)
