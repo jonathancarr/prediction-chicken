@@ -65,8 +65,6 @@
                     </div>
                   </div>
                 </nav>
-
-
                 <div class="container" style="text-align: center">
                   <h1>Premiership Team Ratings</h1><br>
                   <div class="panel panel-default">
@@ -91,15 +89,40 @@
                         </table>
                       </div>
                     </div>
-                    <!-- <div class="panel panel-default">
+                    <div class="panel panel-default">
                     <div class="panel-body">
 
                     <canvas id="myChart"></canvas>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
                     <script>
-
+                    var numWeeks = 0;
                     var ctx = document.getElementById("myChart").getContext('2d');
-                    var labels = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9"];
+
+                    data = [];
+                    <%for(var i = 0; i < prem.length; i++){%>
+                      var colour = "<%=prem[i].colour%>";
+                      var dataset = {
+                            label: "<%=prem[i].team%>",
+                            fill: false,
+            		            backgroundColor : colour,
+            		            pointBackgroundColor: colour,
+            		            pointHoverBackgroundColor: colour,
+            		            borderColor: colour,
+            		            pointBorderColor: colour,
+            		            pointHoverBorderColor: colour
+                    };
+                      dataset.data = [<%=prem[i].history%>];
+                      if(dataset.data.length > numWeeks){
+                        numWeeks = dataset.data.length;
+                      }
+                      data.push(dataset);
+                    <%}%>
+                    var labels = [];
+                    console.log(numWeeks);
+                    for(var i = 1; i <= numWeeks; i++){
+                      labels.push("Week " + i);
+                    }
+                    console.log(labels);
                     var myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
@@ -109,7 +132,7 @@
                 });
               </script>
             </div>
-          </div> -->
+          </div>
 
         </body>
         </html>

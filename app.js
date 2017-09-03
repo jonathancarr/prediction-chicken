@@ -10,7 +10,7 @@ var teams = require('./src/json/teams.json');
 
 //Navbar for header
 var nav = [{
-		Link: '/week/1',
+		Link: '/week',
 		Text: 'Match Predictions'
 	},
 	{

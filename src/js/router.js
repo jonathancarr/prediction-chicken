@@ -25,6 +25,7 @@ var route = function(nav){
 	//Render team ratings page when '/premiership'
 	router.route('/premiership').get(function(req, res){
 		chicken.getTeams({}, function(teams){
+			console.log(teams[0][0].colour); 
 			res.render('premView', {
 				title: 'Team Ratings',
 				nav: nav,
@@ -38,8 +39,7 @@ var route = function(nav){
 		      pointHoverBackgroundColor: '#c11111',
 		      borderColor: '#c11111',
 		      pointBorderColor: '#c11111',
-		      pointHoverBorderColor: '#c11111',
-		      backgroundColor: "#c11111"
+		      pointHoverBorderColor: '#c11111'
 		    },
 		    {
 		      label: "Taranaki",

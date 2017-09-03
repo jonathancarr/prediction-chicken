@@ -22,18 +22,23 @@ var getTeams = function(query, callback){
 		//Assign rankings
 		var prem = [];
 		var champ = [];
+		console.log(p);
 		for(var i = 0; i < p.length; i++){
 			prem.push({
 				team: p[i].team,
 				rating: p[i].rating,
-				ranking: i+1
+				ranking: i+1,
+				colour: p[i].colour,
+				history: p[i].weeklyRatings
 			});
 		}
 		for(var i = 0; i < c.length; i++){
 			champ.push({
 				team: c[i].team,
 				rating: c[i].rating,
-				ranking: i+1
+				ranking: i+1,
+				colour: c[i].colour,
+				history: c[i].weeklyRatings
 			});
 		}
 		callback([prem, champ])
@@ -145,9 +150,13 @@ var predictMargins = function(fixtures, teams){
 	console.log("... Calculating team ratings");
 	//Reset all ratings
 	var ratings = {};
+	var ratingHistory = {};
 	for(var i = 0; i < teams.length; i++){
 		ratings[teams[i].team] = 1000;
+		ratingHistory[teams[i].team] = [];
 	}
+
+
 
 	//Sort fixtures by date
 	fixtures.sort(function(a, b) {
@@ -189,13 +198,20 @@ var predictMargins = function(fixtures, teams){
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
-
+			if(game.year == 2017){
+				ratingHistory[game.home][game.week - 1] = ratings[game.home];
+				ratingHistory[game.away][game.week - 1] = ratings[game.away];
+			}
 		}
-
 	}
 	//Round ratings
 	for(var i = 0; i < teams.length; i++){
 		teams[i].rating = Math.round(ratings[teams[i].team]);
+		var weeklyRating = [];
+		for(var j = 0; j < ratingHistory[teams[i].team].length; j++){
+			weeklyRating.push(Math.round(ratingHistory[teams[i].team][j]));
+		}
+		teams[i].weeklyRatings = weeklyRating;
 	}
 	//Update ratings and predictions
 	dbManager.updateTeams(teams);
