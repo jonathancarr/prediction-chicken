@@ -126,8 +126,9 @@ var getCurWeek = function(){
 		if(day <= 1){return 7;}
 		if(day <= 8){return 8;}
 		if(day <= 15){return 9;}
+		if(day <= 22){return 10;}
 	}
-	return 9;
+	return 11;
 }
 
 module.exports = route;
