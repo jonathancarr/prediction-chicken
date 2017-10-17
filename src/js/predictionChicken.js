@@ -48,6 +48,8 @@ var getTeams = function(query, callback){
 //Query database and return a list of games
 var getGames = function(query, callback){
 	dbManager.getGames(query, function(results){
+		console.log(results);
+
 		//Sort based on date/time
 		results.sort(function(a, b) {
 			return (+a.year*365 + a.month*31 + a.day + a.hour/24.0|| 0) - (+b.year*365 + b.month*31 + b.day + b.hour/24 || 0);

@@ -6,6 +6,9 @@ var getGames = function(query, func){
 	mongodb.connect(url, function(err, db){
 		var collection = db.collection('fixtures');
 		var result = collection.find(query).toArray(function(err, results){
+			console.log(query);
+			console.log(results);
+
 			func(results);
 			db.close();
 		});

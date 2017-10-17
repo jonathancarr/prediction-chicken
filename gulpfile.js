@@ -5,13 +5,7 @@ var jsFiles = ['*.js', 'src/**/*.js'];
 
 gulp.task('inject', function(){
 	var wiredep = require('wiredep').stream;
-	var inject = require('gulp-inject');
 
-	var injectSrc = gulp.src(['./public/css/*.css', 'public/js/*.js'], {read: false});
-
-	var injectOptions = {
-		ignorePath: '/public'		
-	};
 
 	var options = {
 		bowerJson: require('./bower.json'),
@@ -25,7 +19,7 @@ gulp.task('inject', function(){
 		.pipe(gulp.dest('./src/views'));
 });
 
-gulp.task('serve', ['inject'], function(){
+gulp.task('serve', function(){
 	var options = {
 		script: 'app.js',
 		delayTime: 1,

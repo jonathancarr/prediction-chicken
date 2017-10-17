@@ -15,7 +15,11 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 			var week = 0;
 			for(var k = 0; k < gameTable.length; k++){
 				if(gameTable[k].Date.startsWith("Week") || gameTable[k].Date.startsWith("Semi Finals") || gameTable[k].Date.startsWith("Finals") || gameTable[k].Date.startsWith("2015 ITM")){
-					week = (gameTable[k].Date.charAt(gameTable[k].Date.length - 1));
+					if(gameTable[k].Date === "Week 10 - Semi"){
+						week = 10;
+					}else{
+						week = parseInt(gameTable[k].Date.charAt(gameTable[k].Date.length - 1));
+					}
 				}else{
 					var day = gameTable[k].Date.substring(0,2);
 					var month = getMonth(gameTable[k].Date.substring(3));
@@ -38,6 +42,9 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 					}
 					if(away === "Hawke's Bay"){
 						away = "Hawke’s Bay";
+					}
+					if(away === "North harbour"){
+						away = "North Harbour";
 					}
 					var venueArray = gameTable[k].Venue.split(", ");
 					if(venueArray.length == 1){

@@ -68,8 +68,11 @@
 
 
         <div class="container" style="text-align: center">
-
-          <h1>Week <%=week%></h1>
+          <%if(week == 10){%>
+            <h1>Semi Finals</h1>
+          <%}else{%>
+            <h1>Week <%=week%></h1>
+          <%}%>
           <br>
 
 
@@ -165,9 +168,17 @@
                 <%}%>
                 <%for(var i = 0; i < weeks; i++){%>
                 <%if(i + 1 == week){%>
-                <li class="active"><a href="<%i+1%>"><%=i+1%></a></li>
+                  <%if(i + 1 == 10){%>
+                    <li class="active"><a href="<%i+1%>">SF</a></li>
+                  <%}else{%>
+                    <li class="active"><a href="<%i+1%>"><%=i+1%></a></li>
+                  <%}%>
                 <%}else{%>
-                <li><a href="<%=i+1%>"><%=i+1%></a></li>
+                  <%if(i + 1 == 10){%>
+                    <li><a href="<%=i+1%>">SF</a></li>
+                  <%}else{%>
+                    <li><a href="<%=i+1%>"><%=i+1%></a></li>
+                  <%}%>
                 <%}%>
                 <%}%>
                 <%if(week == weeks){%>
@@ -181,10 +192,18 @@
             <div class="visible-xs  ">
               <ul class="pager">
                 <%if(week != 1){%>
-                <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Week <%=parseInt(week) - 1%></a></li>
+                  <%if(week==11){%>
+                    <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Semi Finals</a></li>
+                  <%}else{%>
+                      <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Week <%=parseInt(week) - 1%></a></li>
+                  <%}%>
                 <%}%>
                 <%if(week != weeks){%>
-                <li class="next"><a href='<%=parseInt(week)+1%>'>Week <%=parseInt(week) + 1%> &rarr;</a></li>
+                  <%if(week==9){%>
+                    <li class="next"><a href='<%=parseInt(week)+1%>'>Semi Finals &rarr;</a></li>
+                  <%}else{%>
+                    <li class="next"><a href='<%=parseInt(week)+1%>'>Week <%=parseInt(week) + 1%> &rarr;</a></li>
+                  <%}%>
                 <%}%>
               </ul>
             </div>

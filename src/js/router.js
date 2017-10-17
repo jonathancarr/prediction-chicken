@@ -25,7 +25,7 @@ var route = function(nav){
 	//Render team ratings page when '/premiership'
 	router.route('/premiership').get(function(req, res){
 		chicken.getTeams({}, function(teams){
-			console.log(teams[0][0].colour); 
+			console.log(teams[0][0].colour);
 			res.render('premView', {
 				title: 'Team Ratings',
 				nav: nav,
@@ -90,12 +90,12 @@ var route = function(nav){
 
 	//Render weekly games page for given week
 	router.route('/week/:id').get(function(req, res){
-		var week = req.params.id;
+		var week = parseInt(req.params.id);
 		chicken.getGames({week: week, year: 2017}, function(games){
 			res.render('weekView', {
 				title: 'Week ' + week,
 				week: week,
-				weeks: 9,
+				weeks: 10,
 				games: games,
 				nav: nav
 			});
