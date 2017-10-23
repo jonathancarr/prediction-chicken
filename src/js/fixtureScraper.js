@@ -17,6 +17,8 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 				if(gameTable[k].Date.startsWith("Week") || gameTable[k].Date.startsWith("Semi Finals") || gameTable[k].Date.startsWith("Finals") || gameTable[k].Date.startsWith("2015 ITM")){
 					if(gameTable[k].Date === "Week 10 - Semi"){
 						week = 10;
+					}else if(gameTable[k].Date === "Week 11 - Final"){
+						week = 11;
 					}else{
 						week = parseInt(gameTable[k].Date.charAt(gameTable[k].Date.length - 1));
 					}
@@ -45,6 +47,12 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 					}
 					if(away === "North harbour"){
 						away = "North Harbour";
+					}
+					if(home === "CHAMPIONSHIP FINAL: Wellington"){
+						home = "Wellington"
+					}
+					if(home === "PREMIERSHIP FINAL: Canterbury"){
+						home = "Canterbury"
 					}
 					var venueArray = gameTable[k].Venue.split(", ");
 					if(venueArray.length == 1){

@@ -18,197 +18,208 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/styles.css">
   <!--endinject-->
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
-      <link href="css/styles.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="css/styles.css" rel="stylesheet">
 
 
-    </head>
-    <body>
+</head>
+<body>
 
-      <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Prediction Chicken</a>
-          </div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Prediction Chicken</a>
+      </div>
 
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-            <ul class="nav navbar-nav">
-              <%for(var i = 0; i < nav.length; i++){%>
-              <%if(nav[i].Dropdown == null){%>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav">
+          <%for(var i = 0; i < nav.length; i++){%>
+            <%if(nav[i].Dropdown == null){%>
               <%if("Match Predictions" === nav[i].Text){%>
-              <li class="active"><a href="<%=nav[i].Link%>"><%=nav[i].Text%></a>
-                <%}else{%>
-                <li><a href = "<%=nav[i].Link%>"><%=nav[i].Text%></a>
-                </li>
-                <%}%>
-                <%}else{%>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=nav[i].Text%> <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <%for(var j = 0; j < nav[i].Dropdown.length; j++){%>
-                        <li><a href=<%=nav[i].Dropdown[j].Link%>><%=nav[i].Dropdown[j].Text%></a></li>
-                      <%}%>
-                    </ul>
-                  </li>
-                <%}%>
-                <%}%>
-              </ul>
+                <li class="active"><a href="<%=nav[i].Link%>"><%=nav[i].Text%></a>
+                  <%}else{%>
+                    <li><a href = "<%=nav[i].Link%>"><%=nav[i].Text%></a>
+                    </li>
+                    <%}%>
+                    <%}else{%>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=nav[i].Text%> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <%for(var j = 0; j < nav[i].Dropdown.length; j++){%>
+                            <li><a href=<%=nav[i].Dropdown[j].Link%>><%=nav[i].Dropdown[j].Text%></a></li>
+                            <%}%>
+                          </ul>
+                        </li>
+                        <%}%>
+                        <%}%>
+                      </ul>
 
-            </div>
-          </div>
-        </nav>
-
-
-        <div class="container" style="text-align: center">
-          <%if(week == 10){%>
-            <h1>Semi Finals</h1>
-          <%}else{%>
-            <h1>Week <%=week%></h1>
-          <%}%>
-          <br>
-
-
-          <%for(var i = 0; i < games.length; i++){%>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Game <%=i+1%></h3>
-            </div>
-            <br>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-xs-5">
-                  <h4><%=games[i].home%></h4>
-                </div>
-                <div class="col-xs-2">
-                  <h5>vs</h5>
-                </div>
-                <div class="col-xs-5">
-                  <h4><%=games[i].away%></h4>
-                </div>
-              </div>
-              <%if(games[i].homeScore != 0 || games[i].awayScore != 0){%>
-              <div class="row">
-                <div class="col-xs-5">
-                  <h4><%=games[i].homeScore%></h4>
-                </div>
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-5">
-                  <h4><%=games[i].awayScore%></h4>
-                </div>
-              </div>
-              <%}%>
-              <a class="btn btn-link" data-toggle="collapse" data-target="#details<%=i%>">Details</a>
-
-              <div id="details<%=i%>" class="collapse">
-                <div class="row">
-                  <div class="hidden-xs">
-                    <div class="col-sm-3">
-                    </div>
-                    <div class="col-sm-2">
-                      <p style="text-align:left"><%=games[i].date%></p>
-                    </div>
-                    <div class="col-sm-2">
-                      <p style="text-align:center"><%=games[i].time%></p>
-
-                    </div>
-                    <div class="col-sm-2">
-                      <p style="text-align:right"><%=games[i].venue%></p>
-                    </div>
-                    <div class="col-sm-3">
                     </div>
                   </div>
+                </nav>
 
-                  <div class="visible-xs">
-                    <div class="col-xs-4">
-                      <p style="text-align:left"><%=games[i].date%></p>
-                    </div>
-                    <div class="col-xs-4">
-                      <p style="text-align:center"><%=games[i].time%></p>
 
-                    </div>
-                    <div class="col-xs-4">
-                      <p style="text-align:right"><%=games[i].venue%></p>
-                    </div>
-                  </div>
+                <div class="container" style="text-align: center">
+                  <%if(week == 10){%>
+                    <h1>Semi Finals</h1>
+                    <%}else if(week == 11){%>
+                      <h1>Finals</h1>
+                      <%}else{%>
+                        <h1>Week <%=week%></h1>
+                        <%}%>
+                        <br>
 
-                </div>
-              </div>
 
-            </div>
-            <div class="panel-footer">
-              <%if(games[i].homeScore == 0 && games[i].awayScore == 0){%>
-              <div class="row">
-                <p>Prediction: <%=(games[i].predictTeam + " by " + games[i].predictMargin)%></p>
-              </div>
-              <%}else{%>
-              <div class="row">
-                <p>Chicken Predicted: <%=(games[i].predictTeam + " by " + games[i].predictMargin)%></p>
-              </div>
-              <%}%>
-            </div>
-          </div>
-          <%}%>
+                        <%for(var i = 0; i < games.length; i++){%>
+                          <div class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">Game <%=i+1%></h3>
+                            </div>
+                            <br>
+                            <div class="panel-body">
+                              <div class="row">
+                                <div class="col-xs-5">
+                                  <h4><%=games[i].home%></h4>
+                                </div>
+                                <div class="col-xs-2">
+                                  <h5>vs</h5>
+                                </div>
+                                <div class="col-xs-5">
+                                  <h4><%=games[i].away%></h4>
+                                </div>
+                              </div>
+                              <%if(games[i].homeScore != 0 || games[i].awayScore != 0){%>
+                                <div class="row">
+                                  <div class="col-xs-5">
+                                    <h4><%=games[i].homeScore%></h4>
+                                  </div>
+                                  <div class="col-xs-2">
+                                  </div>
+                                  <div class="col-xs-5">
+                                    <h4><%=games[i].awayScore%></h4>
+                                  </div>
+                                </div>
+                                <%}%>
+                                <a class="btn btn-link" data-toggle="collapse" data-target="#details<%=i%>">Details</a>
 
-          <div class="container-fluid">
-            <div class="hidden-xs">
-              <ul class="pagination">
-                <%if(week == 1){%>
-                <li class="disabled"><a>&laquo;</a></li>
-                <%}else{%>
-                <li><a href=/week/<%=parseInt(week)-1%>>&laquo;</a></li>
-                <%}%>
-                <%for(var i = 0; i < weeks; i++){%>
-                <%if(i + 1 == week){%>
-                  <%if(i + 1 == 10){%>
-                    <li class="active"><a href="<%i+1%>">SF</a></li>
-                  <%}else{%>
-                    <li class="active"><a href="<%i+1%>"><%=i+1%></a></li>
-                  <%}%>
-                <%}else{%>
-                  <%if(i + 1 == 10){%>
-                    <li><a href="<%=i+1%>">SF</a></li>
-                  <%}else{%>
-                    <li><a href="<%=i+1%>"><%=i+1%></a></li>
-                  <%}%>
-                <%}%>
-                <%}%>
-                <%if(week == weeks){%>
-                <li class="disabled"><a>&raquo;</a></li>
-                <%}else{%>
-                <li><a href=/week/<%=parseInt(week)+1%>>&raquo;</a></li>
-                <%}%>
-              </ul>
-            </div>
+                                <div id="details<%=i%>" class="collapse">
+                                  <div class="row">
+                                    <div class="hidden-xs">
+                                      <div class="col-sm-3">
+                                      </div>
+                                      <div class="col-sm-2">
+                                        <p style="text-align:left"><%=games[i].date%></p>
+                                      </div>
+                                      <div class="col-sm-2">
+                                        <p style="text-align:center"><%=games[i].time%></p>
 
-            <div class="visible-xs  ">
-              <ul class="pager">
-                <%if(week != 1){%>
-                  <%if(week==11){%>
-                    <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Semi Finals</a></li>
-                  <%}else{%>
-                      <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Week <%=parseInt(week) - 1%></a></li>
-                  <%}%>
-                <%}%>
-                <%if(week != weeks){%>
-                  <%if(week==9){%>
-                    <li class="next"><a href='<%=parseInt(week)+1%>'>Semi Finals &rarr;</a></li>
-                  <%}else{%>
-                    <li class="next"><a href='<%=parseInt(week)+1%>'>Week <%=parseInt(week) + 1%> &rarr;</a></li>
-                  <%}%>
-                <%}%>
-              </ul>
-            </div>
-          </div>
-          <br>
-        </div>
-      </body>
-      </html>
+                                      </div>
+                                      <div class="col-sm-2">
+                                        <p style="text-align:right"><%=games[i].venue%></p>
+                                      </div>
+                                      <div class="col-sm-3">
+                                      </div>
+                                    </div>
+
+                                    <div class="visible-xs">
+                                      <div class="col-xs-4">
+                                        <p style="text-align:left"><%=games[i].date%></p>
+                                      </div>
+                                      <div class="col-xs-4">
+                                        <p style="text-align:center"><%=games[i].time%></p>
+
+                                      </div>
+                                      <div class="col-xs-4">
+                                        <p style="text-align:right"><%=games[i].venue%></p>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="panel-footer">
+                                <%if(games[i].homeScore == 0 && games[i].awayScore == 0){%>
+                                  <div class="row">
+                                    <p>Prediction: <%=(games[i].predictTeam + " by " + games[i].predictMargin)%></p>
+                                  </div>
+                                  <%}else{%>
+                                    <div class="row">
+                                      <p>Chicken Predicted: <%=(games[i].predictTeam + " by " + games[i].predictMargin)%></p>
+                                    </div>
+                                    <%}%>
+                                  </div>
+                                </div>
+                                <%}%>
+
+                                <div class="container-fluid">
+                                  <div class="hidden-xs">
+                                    <ul class="pagination">
+                                      <%if(week == 1){%>
+                                        <li class="disabled"><a>&laquo;</a></li>
+                                        <%}else{%>
+                                          <li><a href=/week/<%=parseInt(week)-1%>>&laquo;</a></li>
+                                          <%}%>
+                                          <%for(var i = 0; i < weeks; i++){%>
+                                            <%if(i + 1 == week){%>
+                                              <%if(i + 1 == 10){%>
+                                                <li class="active"><a href="<%i+1%>">SF</a></li>
+                                                <%}else if(i + 1 == 11){%>
+                                                  <li class="active"><a href="<%i+1%>">F</a></li>
+
+                                                  <%}else{%>
+                                                    <li class="active"><a href="<%i+1%>"><%=i+1%></a></li>
+                                                    <%}%>
+                                                    <%}else{%>
+                                                      <%if(i + 1 == 10){%>
+                                                        <li><a href="<%=i+1%>">SF</a></li>
+                                                        <%}else if(i + 1 == 11){%>
+                                                          <li><a href="<%=i+1%>">F</a></li>
+                                                          <%}else{%>
+                                                            <li><a href="<%=i+1%>"><%=i+1%></a></li>
+                                                            <%}%>
+                                                            <%}%>
+                                                            <%}%>
+                                                            <%if(week == weeks){%>
+                                                              <li class="disabled"><a>&raquo;</a></li>
+                                                              <%}else{%>
+                                                                <li><a href=/week/<%=parseInt(week)+1%>>&raquo;</a></li>
+                                                                <%}%>
+                                                              </ul>
+                                                            </div>
+
+                                                            <div class="visible-xs  ">
+                                                              <ul class="pager">
+                                                                <%if(week != 1){%>
+                                                                  <%if(week==11){%>
+                                                                    <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Semi Finals</a></li>
+                                                                    <%}else{%>
+                                                                      <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Week <%=parseInt(week) - 1%></a></li>
+                                                                      <%}%>
+                                                                      <%}%>
+                                                                      <%if(week != weeks){%>
+                                                                        <%if(week==9){%>
+                                                                          <li class="next"><a href='<%=parseInt(week)+1%>'>Semi Finals &rarr;</a></li>
+                                                                          <%}else if(week==10){%>
+                                                                            <li class="next"><a href='<%=parseInt(week)+1%>'>Finals &rarr;</a></li>
+
+
+                                                                            <%}else{%>
+                                                                              <li class="next"><a href='<%=parseInt(week)+1%>'>Week <%=parseInt(week) + 1%> &rarr;</a></li>
+                                                                              <%}%>
+                                                                              <%}%>
+                                                                            </ul>
+                                                                          </div>
+                                                                        </div>
+                                                                        <br>
+                                                                      </div>
+                                                                    </body>
+                                                                    </html>

@@ -95,7 +95,7 @@ var route = function(nav){
 			res.render('weekView', {
 				title: 'Week ' + week,
 				week: week,
-				weeks: 10,
+				weeks: 11,
 				games: games,
 				nav: nav
 			});
