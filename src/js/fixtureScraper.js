@@ -1,102 +1,165 @@
 var scraper = require('table-scraper');
 
 //Start the scraping process on the first URL
-var scrapeFixtures = function(fixturesUrls, allTeams, callback){
-	scrapeFixture(fixturesUrls, 0, [], allTeams, callback);
+var scrapeFixtures = function(fixturesUrl, resultsUrls, allTeams, callback){
+	scrapeResults(resultsUrls, 0, [], allTeams, callback, fixturesUrl);
 }
 
 //Scrape fixtures from a URL then call on the next. Calls callback if there are no more URLs.
-var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
-	console.log("... Gathering results from " + fixturesUrls[i].Url)
-	scraper.get(fixturesUrls[i].Url, "next").then(function(tableData) {
-		var year = fixturesUrls[i].Year;
-		for(var j = 0; j < tableData.length; j++){
-			var gameTable = tableData[j];
-			var week = 0;
-			for(var k = 0; k < gameTable.length; k++){
-				if(gameTable[k].Date.startsWith("Week") || gameTable[k].Date.startsWith("Semi Finals") || gameTable[k].Date.startsWith("Finals") || gameTable[k].Date.startsWith("2015 ITM")){
-					if(gameTable[k].Date === "Week 10 - Semi"){
-						week = 10;
-					}else if(gameTable[k].Date === "Week 11 - Final"){
-						week = 11;
-					}else{
-						week = parseInt(gameTable[k].Date.charAt(gameTable[k].Date.length - 1));
-					}
-				}else{
-					var day = gameTable[k].Date.substring(0,2);
-					var month = getMonth(gameTable[k].Date.substring(3));
-					var teams = gameTable[k].Game.split(" v ");
-					if(teams[0].startsWith("Prem") || teams[0].startsWith("Cham") | teams[0].startsWith("Final")){
-						teams[0] = teams[0].split(" - ")[1];
-					}
-					var home = teams[0].split(" (RS)")[0];
-					if(typeof teams[1] != 'undefined'){
-						var away = teams[1].split(" (RS)")[0];
-					}
-					if(home === "Counties Man"){
-						home = "Counties Manukau";
-					}
-					if(away === "Counties Man"){
-						away = "Counties Manukau";
-					}
-					if(home === "Hawke's Bay"){
-						home = "Hawke’s Bay";
-					}
-					if(away === "Hawke's Bay"){
-						away = "Hawke’s Bay";
-					}
-					if(away === "North harbour"){
-						away = "North Harbour";
-					}
-					if(home === "CHAMPIONSHIP FINAL: Wellington"){
-						home = "Wellington"
-					}
-					if(home === "PREMIERSHIP FINAL: Canterbury"){
-						home = "Canterbury"
-					}
-					var venueArray = gameTable[k].Venue.split(", ");
-					if(venueArray.length == 1){
-						var venue = gameTable[k].Venue;
-					}else{
-						var venue = venueArray[venueArray.length-1];
-					}
-					var time = gameTable[k]['Time (NZ)'];
-					var hour = time.split(":")[0];
-					var result = gameTable[k].Result.split("-");
-					var homeScore = result[0];
-					var awayScore = result[1];
-					if(!home.startsWith("Mitre")){
-						fixtures.push({
-							day: day,
-							month: month,
-							year: year,
-							week: week,
-							time: time,
-							hour: hour,
-							home: home,
-							away: away,
-							homeScore: homeScore,
-							awayScore: awayScore,
-							venue: venue
-						});
-					}
+var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixturesUrl){
+	console.log("... Gathering results from " + resultsUrls[i].Url)
+	scraper.get(resultsUrls[i].Url, "next").then(function(tableData) {
+		for(var t = 0; t < tableData.length; t++ ){
+			for(var row = 1; row < tableData[t].length; row++){
+				if(tableData[t][row][0] == "Bye" || tableData[t][row][0] == "Bye :" || tableData[t][row][0] == "Not playing"){
+					continue;
 				}
+				// console.log(tableData[t][row])
+				var home = tableData[t][row][0].trim();
+				home = getTeamName(home, allTeams);
+				var homeScore = tableData[t][row][1].trim();
+				if(homeScore == "." || homeScore == "" || homeScore == " "){
+					homeScore = 0;
+				}
+				homeScore = parseInt(homeScore);
+				var away = tableData[t][row][3].trim();
+				away = getTeamName(away, allTeams);
+				var awayScore = tableData[t][row][4].trim();
+				if(awayScore == "." || awayScore == "" || awayScore == " "){
+					awayScore = 0;
+				}
+				awayScore = parseInt(awayScore);
+				var date = tableData[t][row][5].trim();
+				var dateSplit = date.split("/");
+				var day = parseInt(dateSplit[0]);
+				var month = parseInt(dateSplit[1]);
+				var year = parseInt("20" + dateSplit[2]);
+				var week = 0;
+				var venue = "unknown";
+				var time = 0;
+				var hour = 0;
+				// console.log(home + " " + homeScore + " vs " + away + " " + awayScore + " - " + date)
+				fixtures.push({
+					day: day,
+					month: month,
+					year: year,
+					week: week,
+					time: time,
+					hour: hour,
+					home: home,
+					away: away,
+					homeScore: homeScore,
+					awayScore: awayScore,
+					venue: venue
+				});
 			}
 		}
-		if(i < fixturesUrls.length - 1){
-			scrapeFixture(fixturesUrls, i + 1, fixtures, allTeams, callback);
+		if(i < resultsUrls.length - 1){
+			scrapeResults(resultsUrls, i + 1, fixtures, allTeams, callback, fixturesUrl);
 		}else{
-			callback(fixtures, allTeams);
+			scrapeFixture(fixturesUrl, fixtures, allTeams, callback);
 		}
-
 	});
+}
+
+var week = 0;
+
+function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
+	console.log("... Gathering fixtures from " + fixturesUrl)
+	scraper.get(fixturesUrl, "next").then(function(tableData) {
+		for(var i = 0; i < tableData[0].length; i++){
+			if(tableData[0][i][0].startsWith("WEEK")){
+				week = parseInt(tableData[0][i][0].split(" ")[1]);
+				continue;
+			}
+			if(tableData[0][i][0].startsWith("Day & Date") || tableData[0][i][0].startsWith("Bye")){
+				continue;
+			}
+			if(tableData[0][i][0].startsWith("SUPER")){
+				break;
+			}
+			var home = tableData[0][i][1];
+			home = getTeamName(home, allTeams);
+			var away = tableData[0][i][2];
+			away = getTeamName(away, allTeams);
+			var venue = tableData[0][i][3];
+			venue = venue.replace("\n", " ");
+			var homeScore = 0;
+			var awayScore = 0;
+			var datetime = tableData[0][i][6];
+			if(datetime == "TBC"){
+				var day = 19;
+				var month = 5;
+				var year = 2018;
+				var hour = 0;
+				var time = "TBC";
+			}else{
+				var datetimesplit = datetime.split(" ");
+				var day = parseInt(datetimesplit[1])
+				var month = getMonth(datetimesplit[2])
+				var year = 2018;
+				var time = datetimesplit[3];
+				var timesplit = time.split(":");
+				var hour = parseInt(timesplit[0]);
+			}
+			var loaded = false;
+			for(var j = 0; j < fixtures.length; j++){
+				if(fixtures[j].year == year && fixtures[j].home == home && fixtures[j].away == away){
+					loaded = true;
+					fixtures[j].day = day;
+					fixtures[j].month = month;
+					fixtures[j].day = day;
+					fixtures[j].venue = venue;
+					fixtures[j].time = time;
+					fixtures[j].hour = hour;
+					fixtures[j].week = week;
+				}
+			}
+			if(!loaded){
+				fixtures.push({
+					day: day,
+					month: month,
+					year: year,
+					week: week,
+					time: time,
+					hour: hour,
+					home: home,
+					away: away,
+					homeScore: homeScore,
+					awayScore: awayScore,
+					venue: venue
+				});
+			}
+		}
+		callback(fixtures, allTeams);
+	});
+}
+
+function getTeamName(team, allTeams){
+	for(var i = 0; i < allTeams.length; i++){
+		if(team == allTeams[i].team){
+			return allTeams[i].team;
+		}
+		for(var j = 0; j < allTeams[i].alias.length; j++){
+			if(team == allTeams[i].alias[j]){
+				return allTeams[i].team;
+			}
+		}
+	}
+	console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	console.log("Unknown Team: " + team)
+	console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	return null;
 }
 
 //Return int value for given month string.
 var getMonth = function(month){
-	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	if(month == "Mat"){
+		return 3;
+	}
+	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	for(var i = 0; i < months.length; i++){
-		if(month === months[i]){
+		if(month.startsWith(months[i])){
 			return i + 1;
 		}
 	}

@@ -1,0 +1,90 @@
+[{
+	"team": "Waratahs",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Sunwolves",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Reds",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Melbourne Rebels",
+	"alias": ["Rebels", "Melbourne\nRebels"],
+	"active": true
+},
+{
+	"team": "Brumbies",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Hurricanes",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Highlanders",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Crusaders",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Chiefs",
+	"alias": ["Chiefs,"],
+	"active": true
+},
+{
+	"team": "Blues",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Stormers",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Sharks",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Lions",
+	"alias": ["Cats"],
+	"active": true
+},
+{
+	"team": "Jaguares",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Bulls",
+	"alias": [],
+	"active": true
+},
+{
+	"team": "Southern Kings",
+	"alias": ["Kings", "S.Kings", "Southern Kings"],
+	"active": false
+},
+{
+	"team": "Cheetahs",
+	"alias": ["Cheetahs,"],
+	"active": false
+},
+{
+	"team": "Western Force",
+	"alias": ["W. Force", "Force"],
+	"active": false
+}]
