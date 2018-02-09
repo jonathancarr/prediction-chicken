@@ -65,76 +65,73 @@
                     </div>
                   </div>
                 </nav>
-
                 <div class="container" style="text-align: center">
-                  <h1>Championship Team Ratings</h1><br>
+                  <h1>New Zealand Conference</h1><br>
                   <div class="panel panel-default">
                     <div class="panel-body">
                       <table class="table table-striped table-hover" style="text-align: left">
                         <thead>
                           <tr>
-                            <th class="col-xs-2">Ranking</th>
-                            <th class="col-xs-8">Team</th>
-                            <th class="col-xs-2">Rating</th>
+                            <th>Ranking</th>
+                            <th>Team</th>
+                            <th>Rating</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <%for(var i = 0; i < cham.length; i++){%>
+                          <%for(var i = 0; i < nz.length; i++){%>
                             <tr>
-                              <td class="col-xs-2"><%=cham[i].ranking%></td>
-                              <td class="col-xs-8"><%=cham[i].team
-                                %></td>
-                                <td class="col-xs-2"><%=cham[i].rating%></td>
-                              </tr>
-                              <%}%>
-                            </tbody>
-                          </table>
-
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <canvas id="myChart"></canvas>
-                          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-                          <script>
-                          var numWeeks = 0;
-                          var ctx = document.getElementById("myChart").getContext('2d');
-
-                          data = [];
-                          <%for(var i = 0; i < cham.length; i++){%>
-                            var colour = "<%=cham[i].colour%>";
-                            var dataset = {
-                              label: "<%=cham[i].team%>",
-                              fill: false,
-                              backgroundColor : colour,
-                              pointBackgroundColor: colour,
-                              pointHoverBackgroundColor: colour,
-                              borderColor: colour,
-                              pointBorderColor: colour,
-                              pointHoverBorderColor: colour
-                            };
-                            dataset.data = [<%=cham[i].history%>];
-                            if(dataset.data.length > numWeeks){
-                              numWeeks = dataset.data.length;
-                            }
-                            data.push(dataset);
+                              <td class="col-xs-2"><%=nz[i].ranking%></td>
+                              <td class="col-xs-8"><%=nz[i].team%></td>
+                              <td class="col-xs-2"><%=nz[i].rating%></td>
+                            </tr>
                             <%}%>
-                            var labels = [];
-                            console.log(numWeeks);
-                            for(var i = 1; i <= numWeeks; i++){
-                              labels.push("Week " + i);
-                            }
-                            console.log(labels);
-                            var myChart = new Chart(ctx, {
-                              type: 'line',
-                              data: {
-                                labels: labels,
-                                datasets: data
-                              }
-                            });
-                            </script>
-                          </div>
-                        </div>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                    <div class="panel-body">
 
-                      </body>
-                      </html>
+                    <canvas id="myChart"></canvas>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+                    <script>
+                    var numWeeks = 0;
+                    var ctx = document.getElementById("myChart").getContext('2d');
+
+                    data = [];
+                    <%for(var i = 0; i < nz.length; i++){%>
+                      var colour = "<%=nz[i].colour%>";
+                      var dataset = {
+                            label: "<%=nz[i].team%>",
+                            fill: false,
+            		            backgroundColor : colour,
+            		            pointBackgroundColor: colour,
+            		            pointHoverBackgroundColor: colour,
+            		            borderColor: colour,
+            		            pointBorderColor: colour,
+            		            pointHoverBorderColor: colour
+                    };
+                      dataset.data = [<%=nz[i].history%>];
+                      if(dataset.data.length > numWeeks){
+                        numWeeks = dataset.data.length;
+                      }
+                      data.push(dataset);
+                    <%}%>
+                    var labels = [];
+                    labels.push("2017");
+                    for(var i = 1; i < numWeeks; i++){
+                      labels.push("Week " + i);
+                    }
+                    var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                    labels: labels,
+                    datasets: data
+                  }
+                });
+              </script>
+            </div>
+          </div>
+
+        </body>
+        </html>

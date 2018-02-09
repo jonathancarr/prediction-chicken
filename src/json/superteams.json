@@ -1,76 +1,106 @@
 [{
 	"team": "Waratahs",
 	"alias": [],
+	"colour": "#8ED8F8",
+	"conference": "Australia",
 	"active": true
 },
 {
 	"team": "Sunwolves",
 	"alias": [],
+	"colour": "#E60012",
+	"conference": "Australia",
 	"active": true
 },
 {
 	"team": "Reds",
 	"alias": [],
+	"colour": "#D31245",
+	"conference": "Australia",
 	"active": true
 },
 {
 	"team": "Melbourne Rebels",
 	"alias": ["Rebels", "Melbourne\nRebels"],
+	"colour": "#6077A1",
+	"conference": "Australia",
 	"active": true
 },
 {
 	"team": "Brumbies",
 	"alias": [],
+	"colour": "#002954",
+	"conference": "Australia",
 	"active": true
 },
 {
 	"team": "Hurricanes",
 	"alias": [],
+	"colour": "#FFDA01",
+	"conference": "New Zealand",
 	"active": true
 },
 {
 	"team": "Highlanders",
 	"alias": [],
+	"colour": "#1B54A2",
+	"conference": "New Zealand",
 	"active": true
 },
 {
 	"team": "Crusaders",
 	"alias": [],
+	"colour": "#E63531",
+	"conference": "New Zealand",
 	"active": true
 },
 {
 	"team": "Chiefs",
 	"alias": ["Chiefs,"],
+	"colour": "#2F2C34",
+	"conference": "New Zealand",
 	"active": true
 },
 {
 	"team": "Blues",
 	"alias": [],
+	"colour": "#7FBFE9",
+	"conference": "New Zealand",
 	"active": true
 },
 {
 	"team": "Stormers",
 	"alias": [],
+	"conference": "South Africa",
+	"colour": "#010D47",
 	"active": true
 },
 {
 	"team": "Sharks",
 	"alias": [],
+	"conference": "South Africa",
+	"colour": "#2F2524",
 	"active": true
 },
 {
 	"team": "Lions",
 	"alias": ["Cats"],
+	"conference": "South Africa",
+	"colour": "#E4322E",
 	"active": true
 },
 {
 	"team": "Jaguares",
 	"alias": [],
+	"conference": "South Africa",
+	"colour": "#F7861E",
 	"active": true
 },
 {
 	"team": "Bulls",
 	"alias": [],
+	"conference": "South Africa",
+	"colour": "#0B77D1",
 	"active": true
 },
 {

@@ -7,20 +7,32 @@ var port = process.env.PORT || 8080;
 
 
 var teams = require('./src/json/superteams.json');
+console.log(teams)
 
 //Navbar for header
 var nav = [{
 		Link: '/week',
 		Text: 'Match Predictions'
-	}//,
-	// {
-	// 	Link: '/teams',
-	// 	Text: 'Team Ratings'
-	// },
-	// {
-	// 	Link: '/stats',
-	// 	Text: 'Statistics'
-	// }
+	},
+	{
+		Text: 'Team Ratings',
+		Dropdown: [{
+			Text: 'New Zealand',
+			Link: '/nz'
+		},
+		{
+			Text: 'Australia',
+			Link: '/aus'
+		},
+		{
+			Text: 'South Africa',
+			Link: '/sa'
+		}]
+	},
+	{
+		Link: '/stats',
+		Text: 'Statistics'
+	}
 ];
 var router = require('./src/js/router')(nav);
 

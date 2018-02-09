@@ -10,38 +10,50 @@ var getTeams = function(query, callback){
 			return (+b.rating || 0) - (+a.rating || 0);
 		});
 		//Split teams into prem and champ
-		var p = [];
-		var c = [];
+		var n = [];
+		var a = [];
+		var s = [];
 		for(var i = 0; i < teams.length; i++){
-			if(teams[i].conference === 'Premiership'){
-				p.push(teams[i]);
-			}else{
-				c.push(teams[i]);
+			if(teams[i].conference === 'New Zealand'){
+				n.push(teams[i]);
+			}else if(teams[i].conference === 'Australia'){
+				a.push(teams[i]);
+			}else if(teams[i].conference === 'South Africa'){
+				s.push(teams[i]);
 			}
 		}
 		//Assign rankings
-		var prem = [];
-		var champ = [];
-		console.log(p);
-		for(var i = 0; i < p.length; i++){
-			prem.push({
-				team: p[i].team,
-				rating: p[i].rating,
+		var nz = [];
+		var aus = [];
+		var sa = [];
+		for(var i = 0; i < n.length; i++){
+			nz.push({
+				team: n[i].team,
+				rating: n[i].rating,
 				ranking: i+1,
-				colour: p[i].colour,
-				history: p[i].weeklyRatings
+				colour: n[i].colour,
+				history: n[i].weeklyRatings
 			});
 		}
-		for(var i = 0; i < c.length; i++){
-			champ.push({
-				team: c[i].team,
-				rating: c[i].rating,
+		for(var i = 0; i < a.length; i++){
+			aus.push({
+				team: a[i].team,
+				rating: a[i].rating,
 				ranking: i+1,
-				colour: c[i].colour,
-				history: c[i].weeklyRatings
+				colour: a[i].colour,
+				history: a[i].weeklyRatings
 			});
 		}
-		callback([prem, champ])
+		for(var i = 0; i < s.length; i++){
+			sa.push({
+				team: s[i].team,
+				rating: s[i].rating,
+				ranking: i+1,
+				colour: s[i].colour,
+				history: s[i].weeklyRatings
+			});
+		}
+		callback([nz, aus, sa])
 	});
 }
 
@@ -109,7 +121,7 @@ var getStats = function(query, callback){
 		}
 		var labels = [];
 		var data = [];
-		for(var i = 1; i <= 9; i++){
+		for(var i = 1; i <= 19; i++){
 			labels.push('Week ' + i);
 			if(weeklyCorrect[i] == 0){
 					data.push(0);
@@ -121,11 +133,21 @@ var getStats = function(query, callback){
 			labels: labels,
 			data:data
 		}
-		callback({
-			win: Math.round(gamesCorrect/numGames*100 * 10)/10,
-			margin: Math.round(marginDiff/numGames*10)/10,
-			graph: graph
-		});
+		if(numGames == 0){
+			callback(
+				{
+					win: 0,
+					margin: 0,
+					graph: graph
+				}
+			)
+		}else{
+			callback({
+				win: Math.round(gamesCorrect/numGames*100 * 10)/10,
+				margin: Math.round(marginDiff/numGames*10)/10,
+				graph: graph
+			});
+		}
 	});
 }
 
@@ -200,9 +222,12 @@ var predictMargins = function(fixtures, teams){
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
-			if(game.year == 2017){
-				ratingHistory[game.home][game.week - 1] = ratings[game.home];
-				ratingHistory[game.away][game.week - 1] = ratings[game.away];
+			if(game.year != 2018){
+				ratingHistory[game.home][0] = ratings[game.home];
+				ratingHistory[game.away][0] = ratings[game.away];
+			}else{
+				ratingHistory[game.home][game.week] = ratings[game.home];
+				ratingHistory[game.away][game.week] = ratings[game.away];
 			}
 		}
 	}

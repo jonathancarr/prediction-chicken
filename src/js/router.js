@@ -22,55 +22,45 @@ var route = function(nav){
 		});
 	});
 
-	//Render team ratings page when '/premiership'
-	router.route('/premiership').get(function(req, res){
+	//Render team ratings page when '/nz'
+	router.route('/nz').get(function(req, res){
 		chicken.getTeams({}, function(teams){
-			console.log(teams[0][0].colour);
-			res.render('premView', {
+			res.render('nzView', {
 				title: 'Team Ratings',
 				nav: nav,
-				prem: teams[0],
-				datasets: [{
-		      label: "Cantebury",
-		      data: [1000, 1200, 1200, 1100, 1200, 1500, 1200, 1200, 1040],
-		      fill: false,
-		      backgroundColor : '#c11111',
-		      pointBackgroundColor: '#c11111',
-		      pointHoverBackgroundColor: '#c11111',
-		      borderColor: '#c11111',
-		      pointBorderColor: '#c11111',
-		      pointHoverBorderColor: '#c11111'
-		    },
-		    {
-		      label: "Taranaki",
-		      data: [1000, 1100, 1100, 1500, 1200, 1100, 1250, 1200, 1140],
-		      fill: false,
-		      backgroundColor : '#f2ea09',
-		      pointBackgroundColor: '#f2ea09',
-		      pointHoverBackgroundColor: '#f2ea09',
-		      borderColor: '#f2ea09',
-		      pointBorderColor: '#f2ea09',
-		      pointHoverBorderColor: '#f2ea09',
-		      backgroundColor: "#f2ea09"
-		    }]
+				nz: teams[0]
 			});
 			var jsdom = require('jsdom');
 		});
 	});
 
-	//Render team ratings page when '/championship'
-	router.route('/championship').get(function(req, res){
+	//Render team ratings page when '/aus'
+	router.route('/aus').get(function(req, res){
 		chicken.getTeams({}, function(teams){
-			res.render('champView', {
+			res.render('ausView', {
 				title: 'Team Ratings',
 				nav: nav,
-				cham: teams[1]
+				aus: teams[1]
 			});
+			var jsdom = require('jsdom');
 		});
 	});
 
+	//Render team ratings page when '/sa'
+	router.route('/sa').get(function(req, res){
+		chicken.getTeams({}, function(teams){
+			res.render('saView', {
+				title: 'Team Ratings',
+				nav: nav,
+				sa: teams[2]
+			});
+			var jsdom = require('jsdom');
+		});
+	});
+
+
 	router.route('/stats').get(function(req, res){
-		chicken.getStats({year: 2017}, function(stats){
+		chicken.getStats({year: 2018}, function(stats){
 			res.render('statsView', {
 				title: 'Statistics',
 				nav: nav,
