@@ -3,6 +3,7 @@
 	"alias": [],
 	"colour": "#8ED8F8",
 	"conference": "Australia",
+	"country": "Australia",
 	"active": true
 },
 {
@@ -10,6 +11,7 @@
 	"alias": [],
 	"colour": "#E60012",
 	"conference": "Australia",
+	"country": "Japan",
 	"active": true
 },
 {
@@ -17,6 +19,7 @@
 	"alias": [],
 	"colour": "#D31245",
 	"conference": "Australia",
+	"country": "Australia",
 	"active": true
 },
 {
@@ -24,6 +27,7 @@
 	"alias": ["Rebels", "Melbourne\nRebels"],
 	"colour": "#6077A1",
 	"conference": "Australia",
+	"country": "Australia",
 	"active": true
 },
 {
@@ -31,6 +35,7 @@
 	"alias": [],
 	"colour": "#002954",
 	"conference": "Australia",
+	"country": "Australia",
 	"active": true
 },
 {
@@ -38,6 +43,7 @@
 	"alias": [],
 	"colour": "#FFDA01",
 	"conference": "New Zealand",
+	"country": "New Zealand",
 	"active": true
 },
 {
@@ -45,6 +51,7 @@
 	"alias": [],
 	"colour": "#1B54A2",
 	"conference": "New Zealand",
+	"country": "New Zealand",
 	"active": true
 },
 {
@@ -52,6 +59,7 @@
 	"alias": [],
 	"colour": "#E63531",
 	"conference": "New Zealand",
+	"country": "New Zealand",
 	"active": true
 },
 {
@@ -59,6 +67,8 @@
 	"alias": ["Chiefs,"],
 	"colour": "#2F2C34",
 	"conference": "New Zealand",
+	"country": "New Zealand",
+	"country": "New Zealand",
 	"active": true
 },
 {
@@ -66,12 +76,14 @@
 	"alias": [],
 	"colour": "#7FBFE9",
 	"conference": "New Zealand",
+	"country": "New Zealand",
 	"active": true
 },
 {
 	"team": "Stormers",
 	"alias": [],
 	"conference": "South Africa",
+	"country": "South Africa",
 	"colour": "#010D47",
 	"active": true
 },
@@ -79,6 +91,7 @@
 	"team": "Sharks",
 	"alias": [],
 	"conference": "South Africa",
+	"country": "South Africa",
 	"colour": "#2F2524",
 	"active": true
 },
@@ -86,6 +99,7 @@
 	"team": "Lions",
 	"alias": ["Cats"],
 	"conference": "South Africa",
+	"country": "South Africa",
 	"colour": "#E4322E",
 	"active": true
 },
@@ -93,6 +107,7 @@
 	"team": "Jaguares",
 	"alias": [],
 	"conference": "South Africa",
+	"country": "Argentina",
 	"colour": "#F7861E",
 	"active": true
 },
@@ -100,21 +115,25 @@
 	"team": "Bulls",
 	"alias": [],
 	"conference": "South Africa",
+	"country": "South Africa",
 	"colour": "#0B77D1",
 	"active": true
 },
 {
 	"team": "Southern Kings",
 	"alias": ["Kings", "S.Kings", "Southern Kings"],
+	"country": "South Africa",
 	"active": false
 },
 {
 	"team": "Cheetahs",
 	"alias": ["Cheetahs,"],
+	"country": "South Africa",
 	"active": false
 },
 {
 	"team": "Western Force",
 	"alias": ["W. Force", "Force"],
+	"country": "Australia",
 	"active": false
 }]

@@ -168,8 +168,18 @@ var loadTeams = function(teams, callback){
 	dbManager.updateTeams(teams, callback);
 }
 
+function getCountry(team, teams){
+	for(var i = 0; i < teams.length; i++){
+		if(team == teams[i].team){
+			return teams[i].country;
+		}
+	}
+}
+
 //Predict and update margins for future games
 var predictMargins = function(fixtures, teams){
+
+
 
 	console.log("... Calculating team ratings");
 	//Reset all ratings
@@ -189,15 +199,19 @@ var predictMargins = function(fixtures, teams){
 
 	//Values for determining rating changes. These were one calculated by running simulations
 	var ratingPerPoint = 25;
-	var ratingChangePerPoint = 2.5;
-	var homeAdvantage = 2;
+	var ratingChangePerPoint = 1.2;
+	var homeAdvantage = 3.5;
+	var diffCountry = 1;
 
-	console.log("... Predicting match outcomes");
+	// console.log("... Predicting match outcomes");
 	for(var i = 0; i < fixtures.length; i++){
 		var game = fixtures[i];
 		//Predict outcome based on difference in ratings
 		var diff = ratings[game.home] - ratings[game.away];
 		var prediction = ((diff / ratingPerPoint) + homeAdvantage);
+		if(getCountry(game.away, teams) != getCountry(game.home, teams)){
+			prediction += diffCountry;
+		}
 		//Determine winning team and margin
 		if(prediction > 0){
 			var predictTeam = game.home;
@@ -240,6 +254,7 @@ var predictMargins = function(fixtures, teams){
 		}
 		teams[i].weeklyRatings = weeklyRating;
 	}
+
 	//Update ratings and predictions
 	dbManager.updateTeams(teams);
 	dbManager.updateGames(fixtures);
