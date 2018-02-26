@@ -2,6 +2,8 @@ var dbManager = require('./dbManager')();
 var calendar = require('node-calendar');
 var scrapeFixtures = require('./fixtureScraper');
 
+var nextWeek = -1;
+
 //Query database and return list of games
 var getTeams = function(query, callback){
 	dbManager.getTeams({}, function(teams){
@@ -151,6 +153,10 @@ var getStats = function(query, callback){
 	});
 }
 
+var getNextWeek = function(){
+	return currWeek;
+}
+
 //Get string from day int value
 var getDayString = function(day){
 	var dayStrings = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -174,6 +180,10 @@ function getCountry(team, teams){
 			return teams[i].country;
 		}
 	}
+}
+
+var getNextWeek = function(){
+	return nextWeek;
 }
 
 //Predict and update margins for future games
@@ -232,6 +242,8 @@ var predictMargins = function(fixtures, teams){
 		game.predictScore = predictScore;
 		//If game has been completed, compare prediciton with outcome and change ratings.
 		if(game.homeScore != 0 || game.awayScore != 0){
+			currWeek = game.week;
+
 			var actualMargin = game.homeScore - game.awayScore;
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
@@ -242,6 +254,12 @@ var predictMargins = function(fixtures, teams){
 			}else{
 				ratingHistory[game.home][game.week] = ratings[game.home];
 				ratingHistory[game.away][game.week] = ratings[game.away];
+			}
+		}else{
+			console.log("No results yet! " + game.week)
+			if(nextWeek == -1){
+				console.log(game.week)
+				nextWeek = game.week;
 			}
 		}
 	}
@@ -285,6 +303,7 @@ var getPredictionChicken = function(){
 	chicken.predictMargins = predictMargins;
 	chicken.loadTeams = loadTeams;
 	chicken.getStats = getStats;
+	chicken.getNextWeek = getNextWeek;
 	return chicken;
 }
 module.exports = getPredictionChicken;

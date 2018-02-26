@@ -74,7 +74,7 @@ var route = function(nav){
 
 	//Redirect /week to current week
 	router.route('/week').get(function(req, res){
-		week = getCurWeek();
+		week = chicken.getNextWeek();
 		res.redirect('/week/' + week);
 	});
 
@@ -94,31 +94,6 @@ var route = function(nav){
 	});
 
 	return router
-}
-
-//Get number corresponding to the current week in the Mitre 10 Cup 2017
-var getCurWeek = function(){
-	var date = new Date();
-	var day = date.getDate();
-	var month = date.getMonth() + 1;
-	if(month < 8){return 1;}
-	if(month == 8){
-		if(day <= 20){ return 1;}
-		if(day <= 27){ return 2;}
-		return 3;
-	}else if(month == 9){
-		if(day <= 3){return 3;}
-		if(day <= 10){return 4;}
-		if(day <= 17){return 5;}
-		if(day <= 24){return 6;}
-		return 7;
-	}else if(month == 10){
-		if(day <= 1){return 7;}
-		if(day <= 8){return 8;}
-		if(day <= 15){return 9;}
-		if(day <= 22){return 10;}
-	}
-	return 11;
 }
 
 module.exports = route;
