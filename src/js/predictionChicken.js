@@ -268,7 +268,11 @@ var predictMargins = function(fixtures, teams){
 		teams[i].rating = Math.round(ratings[teams[i].team]);
 		var weeklyRating = [];
 		for(var j = 0; j < ratingHistory[teams[i].team].length; j++){
-			weeklyRating.push(Math.round(ratingHistory[teams[i].team][j]));
+			if(!(ratingHistory[teams[i].team][j])){
+				weeklyRating.push(weeklyRating[weeklyRating.length-1]);
+			}else{
+				weeklyRating.push(Math.round(ratingHistory[teams[i].team][j]));
+			}
 		}
 		teams[i].weeklyRatings = weeklyRating;
 	}
