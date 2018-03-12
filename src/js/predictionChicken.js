@@ -200,7 +200,7 @@ var predictMargins = function(fixtures, teams){
 		ratingHistory[teams[i].team] = [];
 	}
 
-
+	nextWeek = -1;
 
 	//Sort fixtures by date
 	fixtures.sort(function(a, b) {
@@ -256,9 +256,7 @@ var predictMargins = function(fixtures, teams){
 				ratingHistory[game.away][game.week] = ratings[game.away];
 			}
 		}else{
-			console.log("No results yet! " + game.week)
 			if(nextWeek == -1){
-				console.log(game.week)
 				nextWeek = game.week;
 			}
 		}

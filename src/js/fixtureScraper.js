@@ -70,6 +70,7 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 		for(var i = 0; i < tableData[0].length; i++){
 			if(tableData[0][i][0].startsWith("WEEK")){
 				week = parseInt(tableData[0][i][0].split(" ")[1]);
+				console.log("Week " + week)
 				continue;
 			}
 			if(tableData[0][i][0].startsWith("Day & Date") || tableData[0][i][0].startsWith("Bye")){
@@ -87,6 +88,7 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 			var homeScore = 0;
 			var awayScore = 0;
 			var datetime = tableData[0][i][6];
+			console.log(tableData[0][i][7])
 			if(datetime == "TBC"){
 				var day = 19;
 				var month = 5;
@@ -103,6 +105,7 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 				var hour = parseInt(timesplit[0]);
 			}
 			var loaded = false;
+			// console.log(datetime + ";" + home + ";vs;" + away + ";" + venue)
 			for(var j = 0; j < fixtures.length; j++){
 				if(fixtures[j].year == year && fixtures[j].home == home && fixtures[j].away == away){
 					loaded = true;
