@@ -62,11 +62,13 @@
     </div>
   </nav>
   <div class="container" style="text-align: center">
-    <%if(week == 10){%>
+    <%if(week == 20){%>
+      <h1>Quarter Finals</h1>
+    <%}else if(week == 21){%>
       <h1>Semi Finals</h1>
-    <%}else if(week == 11){%>
-      <h1>Finals</h1>
-    <%}else{%>
+    <%}else if(week == 22){%>
+      <h1>Final</h1>
+    <%}%>
       <h1>Week <%=week%></h1>
     <%}%>
     <br>
