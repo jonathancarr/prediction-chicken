@@ -40,13 +40,12 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav">
           <%for(var i = 0; i < nav.length; i++){%>
-          <%if(nav[i].Dropdown == null){%>
-          <%if("Statistics" === nav[i].Text){%>
-          <li class="active"><a href="<%=nav[i].Link%>"><%=nav[i].Text%></a>
-            <%}else{%>
-            <li><a href = "<%=nav[i].Link%>"><%=nav[i].Text%></a>
-            </li>
-            <%}%>
+            <%if(nav[i].Dropdown == null){%>
+              <%if("Statistics" === nav[i].Text){%>
+                <li class="active"><a href="<%=nav[i].Link%>"><%=nav[i].Text%></a>
+              <%}else{%>
+                <li><a href = "<%=nav[i].Link%>"><%=nav[i].Text%></a></li>
+              <%}%>
             <%}else{%>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=nav[i].Text%> <span class="caret"></span></a>
@@ -57,81 +56,74 @@
                 </ul>
               </li>
             <%}%>
-            <%}%>
-          </ul>
-
+          <%}%>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="text-align: center">
+    <h1>Statistics</h1>
+    <br>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class ="row">
+          <div class="col-sm-6">
+            <h4 >Winning Team Accuracy</h4>
+            <h1 class="text-success"><%=win%>%</h1>
+          </div>
+          <div class="visible-xs">
+            <br>
+          </div>
+          <div class="col-sm-6">
+            <h4>Margin Accuracy</h4>
+            <h1 class="text-success"><%=margin%></h1>
+          </div>
         </div>
       </div>
-    </nav>
-
-          <div class="container" style="text-align: center">
-            <h1>Statistics</h1>
-            <br>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class ="row">
-                  <div class="col-sm-6">
-                    <h4 >Winning Team Accuracy</h4>
-                    <h1 class="text-success"><%=win%>%</h1>
-                  </div>
-                  <div class="visible-xs">
-                    <br>
-                  </div>
-                  <div class="col-sm-6">
-                    <h4>Margin Accuracy</h4>
-                    <h1 class="text-success"><%=margin%></h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-body">
-              <h2>Weekly Prediction Accuracy</h2>
-              <br>
-              <canvas id="myChart"></canvas>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-              <script>
-              var ctx = document.getElementById("myChart").getContext('2d');
-              var labels = [];
-              for(var i = 1; i <= <%=graph.labels.length%>; i++){
-                labels.push("Week " + i);
-              }
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  options: {
-    legend: {
-      display: false,
-    },
-    scales: {
-        yAxes: [{
-            display: true,
-            ticks: {
-                suggestedMin: 0,
-                beginAtZero: true,
-                suggestedMax: 100,
-                callback: function(value) {
-                  return value + "%"
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Weekly Prediction Accuracy</h2>
+        <br>
+        <canvas id="myChart"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+        <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var labels = [];
+        for(var i = 1; i <= <%=graph.labels.length%>; i++){
+          labels.push("Week " + i);
+        }
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          options: {
+            legend: {
+              display: false,
+            },
+            scales: {
+              yAxes: [{
+                display: true,
+                ticks: {
+                  suggestedMin: 0,
+                  beginAtZero: true,
+                  suggestedMax: 100,
+                  callback: function(value) {
+                    return value + "%"
+                  }
                 }
+              }]
             }
-        }]
-    }
-  },
-
-
-
-  data: {
-    labels: labels,
-    datasets: [{
-      data: [<%=graph.data%>],
-      backgroundColor: "rgba(63,182,24,1)"
-    }]
-  }
-});
-              </script>
-            </div>
-          </div>
-
-          </div>
-        </body>
-        </html>
+          },
+          data: {
+            labels: labels,
+            datasets: [{
+              data: [<%=graph.data%>],
+              backgroundColor: "rgba(63,182,24,1)"
+            }]
+          }
+        });
+        </script>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
