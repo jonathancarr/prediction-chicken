@@ -14,7 +14,6 @@ var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixtu
 				if(tableData[t][row][0] == "Bye" || tableData[t][row][0] == "Bye :" || tableData[t][row][0] == "Not playing"){
 					continue;
 				}
-				// console.log(tableData[t][row])
 				var home = tableData[t][row][0].trim();
 				home = getTeamName(home, allTeams);
 				var homeScore = tableData[t][row][1].trim();
@@ -38,7 +37,6 @@ var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixtu
 				var venue = "unknown";
 				var time = 0;
 				var hour = 0;
-				// console.log(home + " " + homeScore + " vs " + away + " " + awayScore + " - " + date)
 				fixtures.push({
 					day: day,
 					month: month,
@@ -67,18 +65,33 @@ var week = 0;
 function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 	console.log("... Gathering fixtures from " + fixturesUrl)
 	scraper.get(fixturesUrl, "next").then(function(tableData) {
+		console.log(JSON.stringify(tableData, null, 2))
 		for(var i = 0; i < tableData[0].length; i++){
 			if(tableData[0][i][0].startsWith("WEEK")){
 				week = parseInt(tableData[0][i][0].split(" ")[1]);
 				console.log("Week " + week)
 				continue;
 			}
+			if(tableData[0][i][0].startsWith("SUPER RUGBY QUALIFIERS")){
+				week = 20;
+				console.log('WEEK', week)
+				continue
+			}
+
+			if(tableData[0][i][0].startsWith("SUPER RUGBY SEMI-FINALS")){
+				week = 21;
+				console.log('WEEK', week)
+				continue
+			}
+			if(tableData[0][i][0].startsWith("SUPER RUGBY FINAL")){
+				week = 22;
+				console.log('WEEK', week)
+				continue
+			}
 			if(tableData[0][i][0].startsWith("Day & Date") || tableData[0][i][0].startsWith("Bye")){
 				continue;
 			}
-			if(tableData[0][i][0].startsWith("SUPER")){
-				break;
-			}
+
 			var home = tableData[0][i][1];
 			home = getTeamName(home, allTeams);
 			var away = tableData[0][i][2];
@@ -87,29 +100,37 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 			venue = venue.replace("\n", " ");
 			var homeScore = 0;
 			var awayScore = 0;
-			var datetime = tableData[0][i][6];
-			console.log(tableData[0][i][7])
-			if(datetime == "TBC"){
-				var day = 19;
-				var month = 5;
-				var year = 2018;
-				var hour = 0;
-				var time = "TBC";
+			if(week < 20){
+				var datetime = tableData[0][i][6];
+				if(datetime == "TBC"){
+					var day = 19;
+					var month = 5;
+					var year = 2018;
+					var hour = 0;
+					var time = "TBC";
+				}else{
+					var datetimesplit = datetime.split(" ");
+					var day = parseInt(datetimesplit[1])
+					var month = getMonth(datetimesplit[2])
+					var year = 2018;
+					var time = datetimesplit[3];
+					var timesplit = time.split(":");
+					var hour = parseInt(timesplit[0]);
+				}
 			}else{
-				var datetimesplit = datetime.split(" ");
-				var day = parseInt(datetimesplit[1])
-				var month = getMonth(datetimesplit[2])
-				var year = 2018;
-				var time = datetimesplit[3];
-				var timesplit = time.split(":");
-				var hour = parseInt(timesplit[0]);
+				var day = parseInt(tableData[0][i][0].split(" ")[1])
+				var month = getMonth(tableData[0][i][0].split(" ")[2])
+			}
+			if(week == 20){
+				console.log(day + " " + month + " " + year + " " + time + " " + hour)
 			}
 			var loaded = false;
 			// console.log(datetime + ";" + home + ";vs;" + away + ";" + venue)
 			for(var j = 0; j < fixtures.length; j++){
-				if(fixtures[j].year == year && fixtures[j].home == home && fixtures[j].away == away){
+				//Warning: The following line is a disgusting hack
+				if(fixtures[j].year == year && fixtures[j].home == home && fixtures[j].away == away && (fixtures[j].day == 31 || fixtures[j].home == "Sharks" || fixtures[j].home == "Jaguares" || fixtures[j].month == month)){
+
 					loaded = true;
-					fixtures[j].day = day;
 					fixtures[j].month = month;
 					fixtures[j].day = day;
 					fixtures[j].venue = venue;
@@ -134,6 +155,7 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 				});
 			}
 		}
+		console.log(fixtures)
 		callback(fixtures, allTeams);
 	});
 }
@@ -155,7 +177,7 @@ function getTeamName(team, allTeams){
 	return null;
 }
 
-//Return int value for given month string.
+//R rn int value for given month string.
 var getMonth = function(month){
 	if(month == "Mat"){
 		return 3;

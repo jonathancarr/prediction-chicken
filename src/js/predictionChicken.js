@@ -189,8 +189,6 @@ var getNextWeek = function(){
 //Predict and update margins for future games
 var predictMargins = function(fixtures, teams){
 
-
-
 	console.log("... Calculating team ratings");
 	//Reset all ratings
 	var ratings = {};

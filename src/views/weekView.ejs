@@ -155,21 +155,25 @@
     <div class="container-fluid">
       <ul class="pager">
         <%if(week != 1){%>
-          <%if(week==11){%>
+          <%if(week==21){%>
+            <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Quarter Finals</a></li>
+          <%}else if(week==22){%>
             <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Semi Finals</a></li>
           <%}else{%>
             <li class="previous"><a href='<%=parseInt(week)-1%>'>&larr; Week <%=parseInt(week) - 1%></a></li>
           <%}%>
         <%}%>
-        <%if(week != weeks){%>
-          <%if(week==9){%>
-            <li class="next"><a href='<%=parseInt(week)+1%>'>Semi Finals &rarr;</a></li>
-          <%}else if(week==10){%>
-            <li class="next"><a href='<%=parseInt(week)+1%>'>Finals &rarr;</a></li>
+        <%if(week != 21){%>
+          <%if(week==19){%>
+            <li class="next"><a href='<%=parseInt(week)+1%>'>Quarter Finals &rarr;</a></li>
+            <%}else if(week==20){%>
+              <li class="next"><a href='<%=parseInt(week)+1%>'>Semi Finals &rarr;</a></li>
+            <%}else if(week==21){%>
+              <li class="next"><a href='<%=parseInt(week)+1%>'>Finals &rarr;</a></li>
             <%}else{%>
-              <li class="next"><a href='<%=parseInt(week)+1%>'>Week <%=parseInt(week) + 1%> &rarr;</a></li>
-            <%}%>
+            <li class="next"><a href='<%=parseInt(week)+1%>'>Week <%=parseInt(week) + 1%> &rarr;</a></li>
           <%}%>
+        <%}%>
         </ul>
     </div>
     <br>
