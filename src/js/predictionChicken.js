@@ -48,8 +48,6 @@ var getTeams = function(query, callback){
 //Query database and return a list of games
 var getGames = function(query, callback){
 	dbManager.getGames(query, function(results){
-		console.log(results);
-
 		//Sort based on date/time
 		results.sort(function(a, b) {
 			return (+a.year*365 + a.month*31 + a.day + a.hour/24.0|| 0) - (+b.year*365 + b.month*31 + b.day + b.hour/24 || 0);
@@ -200,12 +198,13 @@ var predictMargins = function(fixtures, teams){
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
-			if(game.year == 2017){
+			if(game.year == 2018){
 				ratingHistory[game.home][game.week - 1] = ratings[game.home];
 				ratingHistory[game.away][game.week - 1] = ratings[game.away];
 			}
 		}
 	}
+	console.log("... Updating team ratings")
 	//Round ratings
 	for(var i = 0; i < teams.length; i++){
 		teams[i].rating = Math.round(ratings[teams[i].team]);
@@ -225,9 +224,9 @@ var update = function(){
 	console.log("Updating Chicken:")
 	dbManager.getTeams({}, function(teams, fixturesUrls){
 		var fixturesUrls = [
-			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Itm2015', Year: 2015},
 			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2016', Year: 2016 },
-			{Url: 'http://www.mitre10cup.co.nz/Fixtures', Year: 2017}
+			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2017', Year: 2017 },
+			{Url: 'http://www.mitre10cup.co.nz/Fixtures', Year: 2018}
 		];
 		scrapeFixtures(fixturesUrls, teams, predictMargins);
 	});

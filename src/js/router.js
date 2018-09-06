@@ -70,7 +70,7 @@ var route = function(nav){
 	});
 
 	router.route('/stats').get(function(req, res){
-		chicken.getStats({year: 2017}, function(stats){
+		chicken.getStats({year: 2018}, function(stats){
 			res.render('statsView', {
 				title: 'Statistics',
 				nav: nav,
@@ -91,7 +91,7 @@ var route = function(nav){
 	//Render weekly games page for given week
 	router.route('/week/:id').get(function(req, res){
 		var week = parseInt(req.params.id);
-		chicken.getGames({week: week, year: 2017}, function(games){
+		chicken.getGames({week: week, year: 2018}, function(games){
 			res.render('weekView', {
 				title: 'Week ' + week,
 				week: week,

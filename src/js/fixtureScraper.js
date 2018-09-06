@@ -26,7 +26,7 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 					var day = gameTable[k].Date.substring(0,2);
 					var month = getMonth(gameTable[k].Date.substring(3));
 					var teams = gameTable[k].Game.split(" v ");
-					if(teams[0].startsWith("Prem") || teams[0].startsWith("Cham") | teams[0].startsWith("Final")){
+					if(teams[0].startsWith("Prem") || teams[0].startsWith("Cham")){
 						teams[0] = teams[0].split(" - ")[1];
 					}
 					var home = teams[0].split(" (RS)")[0];
@@ -51,6 +51,12 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 					if(home === "CHAMPIONSHIP FINAL: Wellington"){
 						home = "Wellington"
 					}
+					if(home == "FINAL: Wellington"){
+						home = "Wellington"
+					}
+					if(home === "Final: Canterbury"){
+						home = "Canterbury"
+					}
 					if(home === "PREMIERSHIP FINAL: Canterbury"){
 						home = "Canterbury"
 					}
@@ -61,7 +67,11 @@ var scrapeFixture = function(fixturesUrls, i, fixtures, allTeams, callback){
 						var venue = venueArray[venueArray.length-1];
 					}
 					var time = gameTable[k]['Time (NZ)'];
-					var hour = time.split(":")[0];
+					if(time){
+						var hour = time.split(":")[0];
+					}else{
+						var hour = 7;
+					}
 					var result = gameTable[k].Result.split("-");
 					var homeScore = result[0];
 					var awayScore = result[1];
