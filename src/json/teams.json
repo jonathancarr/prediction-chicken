@@ -1,0 +1,283 @@
+[{
+	"team": "Waratahs",
+	"alias": [],
+	"colour": "#8ED8F8",
+	"conference": "Australia",
+	"country": "Australia",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Sunwolves",
+	"alias": [],
+	"colour": "#E60012",
+	"conference": "Australia",
+	"country": "Japan",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Reds",
+	"alias": [],
+	"colour": "#D31245",
+	"conference": "Australia",
+	"country": "Australia",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Melbourne Rebels",
+	"alias": ["Rebels", "Melbourne\nRebels"],
+	"colour": "#6077A1",
+	"conference": "Australia",
+	"country": "Australia",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Brumbies",
+	"alias": [],
+	"colour": "#002954",
+	"conference": "Australia",
+	"country": "Australia",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Hurricanes",
+	"alias": [],
+	"colour": "#FFDA01",
+	"conference": "New Zealand",
+	"country": "New Zealand",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Highlanders",
+	"alias": [],
+	"colour": "#1B54A2",
+	"conference": "New Zealand",
+	"country": "New Zealand",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Crusaders",
+	"alias": [],
+	"colour": "#E63531",
+	"conference": "New Zealand",
+	"country": "New Zealand",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Chiefs",
+	"alias": ["Chiefs,"],
+	"colour": "#2F2C34",
+	"conference": "New Zealand",
+	"country": "New Zealand",
+	"country": "New Zealand",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Blues",
+	"alias": [],
+	"colour": "#7FBFE9",
+	"conference": "New Zealand",
+	"country": "New Zealand",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Stormers",
+	"alias": [],
+	"conference": "South Africa",
+	"country": "South Africa",
+	"colour": "#010D47",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Sharks",
+	"alias": [],
+	"conference": "South Africa",
+	"country": "South Africa",
+	"colour": "#2F2524",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Lions",
+	"alias": ["Cats"],
+	"conference": "South Africa",
+	"country": "South Africa",
+	"colour": "#E4322E",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Jaguares",
+	"alias": [],
+	"conference": "South Africa",
+	"country": "Argentina",
+	"colour": "#F7861E",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Bulls",
+	"alias": [],
+	"conference": "South Africa",
+	"country": "South Africa",
+	"colour": "#0B77D1",
+	"tournament": "Super",
+	"active": true
+},
+{
+	"team": "Southern Kings",
+	"alias": ["Kings", "S.Kings", "Southern Kings"],
+	"country": "South Africa",
+	"tournament": "Super",
+	"active": false
+},
+{
+	"team": "Cheetahs",
+	"alias": ["Cheetahs,"],
+	"country": "South Africa",
+	"tournament": "Super",
+	"active": false
+},
+{
+	"team": "Western Force",
+	"alias": ["W. Force", "Force"],
+	"country": "Australia",
+	"tournament": "Super",
+	"active": false
+},
+{
+	"team": "Canterbury",
+	"alias": [],
+	"conference": "Premiership",
+	"colour": "#DF1E25",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Counties Manukau",
+	"alias": ["Counties Man"],
+	"conference": "Premiership",
+	"colour": "#AA0009",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Taranaki",
+	"alias": [],
+	"conference": "Premiership",
+	"colour": "#FAB019",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Tasman",
+	"alias": [],
+	"conference": "Premiership",
+	"colour": "#CC2043",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Waikato",
+	"alias": [],
+	"conference": "Premiership",
+	"colour": "#FDD812",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Auckland",
+	"alias": [],
+	"conference": "Premiership",
+	"colour": "#143269",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Bay of Plenty",
+	"alias": [],
+	"conference": "Championship",
+	"colour": "#29488A",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Wellington",
+	"alias": [],
+	"conference": "Championship",
+	"colour": "#FFC100",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Manawatu",
+	"alias": [],
+	"conference": "Championship",
+	"colour": "#029850",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "North Harbour",
+	"alias": ["North harbour"],
+	"conference": "Premiership",
+	"colour": "#9C003B",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Northland",
+	"alias": [],
+	"conference": "Championship",
+	"colour": "#9BB3D5",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Otago",
+	"alias": [],
+	"conference": "Championship",
+	"colour": "#0157A0",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Southland",
+	"alias": [],
+	"conference": "Championship",
+	"colour": "#79001F",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+},
+{
+	"team": "Hawke’s Bay",
+	"alias": ["Hawke's Bay"],
+	"conference": "Championship",
+	"colour": "#1C1C1C",
+	"country": "New Zealand",
+	"tournament": "NPC",
+	"active": true
+}]

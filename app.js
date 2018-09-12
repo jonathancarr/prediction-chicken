@@ -6,40 +6,18 @@ var chicken = require('./src/js/predictionChicken')();
 var port = process.env.PORT || 8080;
 
 
-var teams = require('./src/json/superteams.json');
-console.log(teams)
+var teams = require('./src/json/teams.json');
 
-//Navbar for header
-var nav = [{
-		Link: '/week',
-		Text: 'Match Predictions'
-	},
-	{
-		Text: 'Team Ratings',
-		Dropdown: [{
-			Text: 'New Zealand',
-			Link: '/nz'
-		},
-		{
-			Text: 'Australia',
-			Link: '/aus'
-		},
-		{
-			Text: 'South Africa',
-			Link: '/sa'
-		}]
-	},
-	{
-		Link: '/stats',
-		Text: 'Statistics'
-	}
-];
-var router = require('./src/js/router')(nav);
+var router = require('./src/js/router')();
+var npcRouter = require('./src/js/npcRouter')();
+var superRouter = require('./src/js/superRouter')();
 
 //Setup express server and listen on port
 app.use(express.static('public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
+app.use('/super', superRouter);
+app.use('/npc', npcRouter);
 app.use('/', router);
 
 app.listen(port, function(err){

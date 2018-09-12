@@ -1,61 +1,30 @@
 var dbManager = require('./dbManager')();
 var calendar = require('node-calendar');
-var scrapeFixtures = require('./fixtureScraper');
+var scrapeNPCFixtures = require('./npcFixtureScraper');
 
 var nextWeek = -1;
 
 //Query database and return list of games
 var getTeams = function(query, callback){
-	dbManager.getTeams({}, function(teams){
+	console.log(query)
+	dbManager.getTeams(query, function(teams){
 		//Sort based on rating
 		teams.sort(function(a, b) {
 			return (+b.rating || 0) - (+a.rating || 0);
 		});
-		//Split teams into prem and champ
-		var n = [];
-		var a = [];
-		var s = [];
-		for(var i = 0; i < teams.length; i++){
-			if(teams[i].conference === 'New Zealand'){
-				n.push(teams[i]);
-			}else if(teams[i].conference === 'Australia'){
-				a.push(teams[i]);
-			}else if(teams[i].conference === 'South Africa'){
-				s.push(teams[i]);
-			}
-		}
+		console.log(teams)
 		//Assign rankings
-		var nz = [];
-		var aus = [];
-		var sa = [];
-		for(var i = 0; i < n.length; i++){
-			nz.push({
-				team: n[i].team,
-				rating: n[i].rating,
+		var result = [];
+		for(var i = 0; i < teams.length; i++){
+			result.push({
+				team: teams[i].team,
+				rating: teams[i].rating,
 				ranking: i+1,
-				colour: n[i].colour,
-				history: n[i].weeklyRatings
+				colour: teams[i].colour,
+				history: teams[i].weeklyRatings
 			});
 		}
-		for(var i = 0; i < a.length; i++){
-			aus.push({
-				team: a[i].team,
-				rating: a[i].rating,
-				ranking: i+1,
-				colour: a[i].colour,
-				history: a[i].weeklyRatings
-			});
-		}
-		for(var i = 0; i < s.length; i++){
-			sa.push({
-				team: s[i].team,
-				rating: s[i].rating,
-				ranking: i+1,
-				colour: s[i].colour,
-				history: s[i].weeklyRatings
-			});
-		}
-		callback([nz, aus, sa])
+		callback(result)
 	});
 }
 
@@ -282,16 +251,24 @@ var predictMargins = function(fixtures, teams){
 var update = function(){
 	console.log("Updating Chicken:")
 	dbManager.getTeams({}, function(teams){
-		var fixturesUrl = "http://www.superxv.com/fixtures/";
-		var resultsUrls = [
-			{Url: 'http://www.superxv.com/results/2018-super-rugby-results/'},
-			{Url: 'http://www.superxv.com/results/2017-super-rugby-results/'},
-			{Url: 'http://www.superxv.com/results/2016-super-rugby-results/'},
-			{Url: 'http://www.superxv.com/results/2015-super-rugby-results/'},
-			{Url: 'http://www.superxv.com/results/2014-super-rugby-results/'},
-			{Url: 'http://www.superxv.com/results/2013-super-rugby-results/'},
+		// var fixturesUrl = "http://www.superxv.com/fixtures/";
+		// var resultsUrls = [
+		// 	{Url: 'http://www.superxv.com/results/2018-super-rugby-results/'},
+		// 	{Url: 'http://www.superxv.com/results/2017-super-rugby-results/'},
+		// 	{Url: 'http://www.superxv.com/results/2016-super-rugby-results/'},
+		// 	{Url: 'http://www.superxv.com/results/2015-super-rugby-results/'},
+		// 	{Url: 'http://www.superxv.com/results/2014-super-rugby-results/'},
+		// 	{Url: 'http://www.superxv.com/results/2013-super-rugby-results/'},
+		// ];
+		// scrapeFixtures(fixturesUrl, resultsUrls, teams, predictMargins);
+
+		var npcResultsUrls = [
+			{Url: 'http://www.mitre10cup.co.nz/Fixtures', Year: 2018},
+			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2017', Year: 2017},
+			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2016', Year: 2016}
 		];
-		scrapeFixtures(fixturesUrl, resultsUrls, teams, predictMargins);
+		scrapeNPCFixtures(npcResultsUrls, teams, predictMargins);
+
 	});
 }
 
