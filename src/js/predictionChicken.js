@@ -172,15 +172,16 @@ var predictMargins = function(fixtures, teams){
 	fixtures.sort(function(a, b) {
 		return (+a.year*365 + a.month*31 + a.day || 0) - (+b.year*365 + b.month*31 + b.day || 0);
 	});
-
 	//Values for determining rating changes. These were one calculated by running simulations
 	var ratingPerPoint = 25;
-	var ratingChangePerPoint = 1.2;
-	var homeAdvantage = 3.5;
+	var ratingChangePerPoint = 2;
+	var homeAdvantage = 4.5;
 	var diffCountry = 1;
 
 	// console.log("... Predicting match outcomes");
 	for(var i = 0; i < fixtures.length; i++){
+		if(fixtures[i].year == 2019) continue;
+		if(fixtures[i].tournament != "super") continue;
 		var game = fixtures[i];
 		//Predict outcome based on difference in ratings
 		var diff = ratings[game.home] - ratings[game.away];
@@ -209,9 +210,10 @@ var predictMargins = function(fixtures, teams){
 		//If game has been completed, compare prediciton with outcome and change ratings.
 		if(game.homeScore != 0 || game.awayScore != 0){
 			currWeek = game.week;
-
 			var actualMargin = game.homeScore - game.awayScore;
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
+			diff2 += Math.abs(actualMargin - prediction)
+			countlol++;
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
 			if(game.year != 2019){
