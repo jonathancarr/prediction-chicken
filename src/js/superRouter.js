@@ -70,7 +70,7 @@ var route = function(){
 
 
 	router.route('/stats').get(function(req, res){
-		chicken.getStats({year: 2018}, function(stats){
+		chicken.getStats({year: 2019}, function(stats){
 			res.render('statsView', {
 				title: 'Statistics',
 				nav: nav,

@@ -217,7 +217,7 @@ var predictMargins = function(fixtures, teams){
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
-			if(game.year != 2018){
+			if(game.year != 2019){
 				ratingHistory[game.home][0] = ratings[game.home];
 				ratingHistory[game.away][0] = ratings[game.away];
 			}else{
@@ -255,12 +255,13 @@ var update = function(){
 	dbManager.getTeams({}, function(teams){
 		var fixturesUrl = "http://www.superxv.com/fixtures/";
 		var resultsUrls = [
+			{Url: 'http://www.superxv.com/results/2019-super-rugby-results/'},
 			{Url: 'http://www.superxv.com/results/2018-super-rugby-results/'},
-			// {Url: 'http://www.superxv.com/results/2017-super-rugby-results/'},
-			// {Url: 'http://www.superxv.com/results/2016-super-rugby-results/'},
-			// {Url: 'http://www.superxv.com/results/2015-super-rugby-results/'},
-			// {Url: 'http://www.superxv.com/results/2014-super-rugby-results/'},
-			// {Url: 'http://www.superxv.com/results/2013-super-rugby-results/'},
+			{Url: 'http://www.superxv.com/results/2017-super-rugby-results/'},
+			{Url: 'http://www.superxv.com/results/2016-super-rugby-results/'},
+			{Url: 'http://www.superxv.com/results/2015-super-rugby-results/'},
+			{Url: 'http://www.superxv.com/results/2014-super-rugby-results/'},
+			{Url: 'http://www.superxv.com/results/2013-super-rugby-results/'},
 		];
 		scrapeSuperFixtures(fixturesUrl, resultsUrls, teams, predictMargins);
 

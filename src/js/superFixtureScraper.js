@@ -48,7 +48,8 @@ var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixtu
 					away: away,
 					homeScore: homeScore,
 					awayScore: awayScore,
-					venue: venue
+					venue: venue,
+					tournament: "super"
 				});
 			}
 		}
