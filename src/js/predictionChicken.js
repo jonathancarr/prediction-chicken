@@ -212,8 +212,6 @@ var predictMargins = function(fixtures, teams){
 			currWeek = game.week;
 			var actualMargin = game.homeScore - game.awayScore;
 			var ratingChange = ratingChangePerPoint * (actualMargin - prediction);
-			diff2 += Math.abs(actualMargin - prediction)
-			countlol++;
 			ratings[game.home] = ratings[game.home] + ratingChange;
 			ratings[game.away] = ratings[game.away] - ratingChange;
 			if(game.year != 2019){
