@@ -37,33 +37,33 @@ var route = function(){
 
 	//Render team ratings page when '/nz'
 	router.route('/nz').get(function(req, res){
-		chicken.getTeams({}, function(teams){
+		chicken.getTeams({tournament: "super", conference: "New Zealand"}, function(teams){
 			res.render('teamsView', {
 				title: 'New Zealand Conference',
 				nav: nav,
-				teams: teams[0]
+				teams: teams
 			});
 		});
 	});
 
 	//Render team ratings page when '/aus'
 	router.route('/aus').get(function(req, res){
-		chicken.getTeams({}, function(teams){
+		chicken.getTeams({tournament: "super", conference: "Australia"}, function(teams){
 			res.render('teamsView', {
 				title: 'Australian Conference',
 				nav: nav,
-				teams: teams[1]
+				teams: teams
 			});
 		});
 	});
 
 	//Render team ratings page when '/sa'
 	router.route('/sa').get(function(req, res){
-		chicken.getTeams({}, function(teams){
+		chicken.getTeams({tournament: "super", conference: "South Africa"}, function(teams){
 			res.render('teamsView', {
 				title: 'South African Conference',
 				nav: nav,
-				teams: teams[2]
+				teams: teams
 			});
 		});
 	});
