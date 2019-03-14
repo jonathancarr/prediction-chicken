@@ -124,10 +124,6 @@ var getStats = function(query, callback){
 	});
 }
 
-var getNextWeek = function(){
-	return currWeek;
-}
-
 //Get string from day int value
 var getDayString = function(day){
 	var dayStrings = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -154,6 +150,7 @@ function getCountry(team, teams){
 }
 
 var getNextWeek = function(){
+	console.log(nextWeek)
 	return nextWeek;
 }
 
@@ -227,6 +224,7 @@ var predictMargins = function(fixtures, teams){
 		}else{
 			if(nextWeek == -1){
 				nextWeek = game.week;
+				console.log(nextWeek)
 			}
 		}
 	}
