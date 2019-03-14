@@ -180,8 +180,6 @@ var predictMargins = function(fixtures, teams){
 
 	// console.log("... Predicting match outcomes");
 	for(var i = 0; i < fixtures.length; i++){
-		if(fixtures[i].year == 2019) continue;
-		if(fixtures[i].tournament != "super") continue;
 		var game = fixtures[i];
 		//Predict outcome based on difference in ratings
 		var diff = ratings[game.home] - ratings[game.away];
