@@ -1,7 +1,7 @@
 var scraper = require('table-scraper');
 
 //Start the scraping process on the first URL
-var scrapeFixtures = function(fixturesUrl, resultsUrls, allTeams, callback){
+var scrapeSuperFixtures = function(fixturesUrl, resultsUrls, allTeams, callback){
 	scrapeResults(resultsUrls, 0, [], allTeams, callback, fixturesUrl);
 }
 
@@ -64,29 +64,29 @@ var week = 0;
 
 function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 	console.log("... Gathering fixtures from " + fixturesUrl)
-	scraper.get(fixturesUrl, "next").then(function(tableData) {
+	scraper.get(fixturesUrl).then(function(tableData) {
 		console.log(JSON.stringify(tableData, null, 2))
 		for(var i = 0; i < tableData[0].length; i++){
-			if(tableData[0][i][0].startsWith("WEEK")){
+			if(tableData[0][i][0].startsWith("ROUND")){
 				week = parseInt(tableData[0][i][0].split(" ")[1]);
 				console.log("Week " + week)
 				continue;
 			}
-			if(tableData[0][i][0].startsWith("SUPER RUGBY QUALIFIERS")){
+			if(tableData[0][i][0].startsWith("Super Rugby Qualifiers")){
 				week = 20;
 				console.log('WEEK', week)
-				continue
+				continue;
 			}
 
-			if(tableData[0][i][0].startsWith("SUPER RUGBY SEMI-FINALS")){
+			if(tableData[0][i][0].startsWith("Super Rugby Semi Finals")){
 				week = 21;
 				console.log('WEEK', week)
-				continue
+				continue;
 			}
-			if(tableData[0][i][0].startsWith("SUPER RUGBY FINAL")){
+			if(tableData[0][i][0].startsWith("Super Rugby Final")){
 				week = 22;
 				console.log('WEEK', week)
-				continue
+				continue;
 			}
 			if(tableData[0][i][0].startsWith("Day & Date") || tableData[0][i][0].startsWith("Bye")){
 				continue;
@@ -97,23 +97,28 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 			var away = tableData[0][i][2];
 			away = getTeamName(away, allTeams);
 			var venue = tableData[0][i][3];
+			console.log(tableData[0][i])
 			venue = venue.replace("\n", " ");
 			var homeScore = 0;
 			var awayScore = 0;
 			if(week < 20){
+				var date = tableData[0][i][0];
+				var datesplit = date.split(" ");
+				var dayop
+				var day = parseInt(datesplit[1])
+				var month = getMonth(datesplit[2])
+				var year = 2019;
 				var datetime = tableData[0][i][6];
-				if(datetime == "TBC"){
-					var day = 19;
-					var month = 5;
-					var year = 2018;
-					var hour = 0;
-					var time = "TBC";
-				}else{
-					var datetimesplit = datetime.split(" ");
+				var datetimesplit = datetime.split(" ")
+				if(datetimesplit.length > 2){
 					var day = parseInt(datetimesplit[1])
+					console.log(datetimesplit)
 					var month = getMonth(datetimesplit[2])
-					var year = 2018;
 					var time = datetimesplit[3];
+					var timesplit = time.split(":");
+					var hour = parseInt(timesplit[0]);
+				}else{
+					var time = datetimesplit[0];
 					var timesplit = time.split(":");
 					var hour = parseInt(timesplit[0]);
 				}
@@ -151,7 +156,8 @@ function scrapeFixture(fixturesUrl, fixtures, allTeams, callback){
 					away: away,
 					homeScore: homeScore,
 					awayScore: awayScore,
-					venue: venue
+					venue: venue,
+					tournament: "super"
 				});
 			}
 		}
@@ -179,6 +185,7 @@ function getTeamName(team, allTeams){
 
 //R rn int value for given month string.
 var getMonth = function(month){
+	console.log(month)
 	if(month == "Mat"){
 		return 3;
 	}
@@ -191,4 +198,4 @@ var getMonth = function(month){
 	return 0;
 }
 
-module.exports = scrapeFixtures;
+module.exports = scrapeSuperFixtures;

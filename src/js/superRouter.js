@@ -91,11 +91,12 @@ var route = function(){
 	//Render weekly games page for given week
 	router.route('/week/:id').get(function(req, res){
 		var week = parseInt(req.params.id);
-		chicken.getGames({week: week, year: 2018}, function(games){
+		chicken.getGames({week: week, year: 2019, tournament: "super"}, function(games){
 			res.render('weekView', {
 				title: 'Week ' + week,
 				week: week,
 				weeks: 19,
+				playoffs: [{week: 19, label: "Quarter Finals"}, {week: 20, label: "Semi Finals"}, {week: 21, label: "Finals"}],
 				games: games,
 				nav: nav
 			});

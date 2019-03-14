@@ -7,7 +7,7 @@ var route = function(nav){
 
 	//Redirect '/' path to '/week'
 	router.route('/').get(function(req, res){
-		res.redirect('/npc');
+		res.redirect('/super');
 	});
 
 	return router

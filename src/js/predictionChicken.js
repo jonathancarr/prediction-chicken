@@ -1,6 +1,8 @@
 var dbManager = require('./dbManager')();
 var calendar = require('node-calendar');
 var scrapeNPCFixtures = require('./npcFixtureScraper');
+var scrapeSuperFixtures = require('./superFixtureScraper');
+
 
 var nextWeek = -1;
 
@@ -251,23 +253,23 @@ var predictMargins = function(fixtures, teams){
 var update = function(){
 	console.log("Updating Chicken:")
 	dbManager.getTeams({}, function(teams){
-		// var fixturesUrl = "http://www.superxv.com/fixtures/";
-		// var resultsUrls = [
-		// 	{Url: 'http://www.superxv.com/results/2018-super-rugby-results/'},
-		// 	{Url: 'http://www.superxv.com/results/2017-super-rugby-results/'},
-		// 	{Url: 'http://www.superxv.com/results/2016-super-rugby-results/'},
-		// 	{Url: 'http://www.superxv.com/results/2015-super-rugby-results/'},
-		// 	{Url: 'http://www.superxv.com/results/2014-super-rugby-results/'},
-		// 	{Url: 'http://www.superxv.com/results/2013-super-rugby-results/'},
-		// ];
-		// scrapeFixtures(fixturesUrl, resultsUrls, teams, predictMargins);
-
-		var npcResultsUrls = [
-			{Url: 'http://www.mitre10cup.co.nz/Fixtures', Year: 2018},
-			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2017', Year: 2017},
-			{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2016', Year: 2016}
+		var fixturesUrl = "http://www.superxv.com/fixtures/";
+		var resultsUrls = [
+			{Url: 'http://www.superxv.com/results/2018-super-rugby-results/'},
+			// {Url: 'http://www.superxv.com/results/2017-super-rugby-results/'},
+			// {Url: 'http://www.superxv.com/results/2016-super-rugby-results/'},
+			// {Url: 'http://www.superxv.com/results/2015-super-rugby-results/'},
+			// {Url: 'http://www.superxv.com/results/2014-super-rugby-results/'},
+			// {Url: 'http://www.superxv.com/results/2013-super-rugby-results/'},
 		];
-		scrapeNPCFixtures(npcResultsUrls, teams, predictMargins);
+		scrapeSuperFixtures(fixturesUrl, resultsUrls, teams, predictMargins);
+
+		// var npcResultsUrls = [
+		// 	{Url: 'http://www.mitre10cup.co.nz/Fixtures', Year: 2018},
+		// 	{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2017', Year: 2017},
+		// 	{Url: 'http://www.mitre10cup.co.nz/Fixtures/Index/Mitre2016', Year: 2016}
+		// ];
+		// scrapeNPCFixtures(npcResultsUrls, teams, predictMargins);
 
 	});
 }
