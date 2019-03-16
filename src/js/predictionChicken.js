@@ -180,7 +180,7 @@ var predictMargins = function(fixtures, teams){
 
 	// console.log("... Predicting match outcomes");
 	for(var i = 0; i < fixtures.length; i++){
-		if(fixtures[i].homeScore == "-" || fixtures.awayScore == "-") {
+		if(fixtures[i].homeScore == "–" || fixtures.awayScore == "–") {
 			console.log(fixtures[i])
 			continue;
 		}
