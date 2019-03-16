@@ -20,7 +20,7 @@ var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixtu
 				if(homeScore == "." || homeScore == "" || homeScore == " "){
 					homeScore = 0;
 				}
-				if(homeScore != "-"){
+				if(homeScore != "–"){
 					homeScore = parseInt(homeScore);
 				}
 				var away = tableData[t][row][3].trim();
@@ -29,9 +29,10 @@ var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixtu
 				if(awayScore == "." || awayScore == "" || awayScore == " "){
 					awayScore = 0;
 				}
-				if(awayScore != "-"){
+				if(awayScore != "–"){
 					awayScore = parseInt(awayScore);
 				}
+				console.log(awayScore)
 				var date = tableData[t][row][5].trim();
 				var dateSplit = date.split("/");
 				var day = parseInt(dateSplit[0]);
