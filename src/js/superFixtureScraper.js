@@ -33,7 +33,7 @@ var scrapeResults = function(resultsUrls, i, fixtures, allTeams, callback, fixtu
 					awayScore = parseInt(awayScore);
 				}
 				console.log(awayScore)
-				var date = tableData[t][row][5].trim();
+				var date = tableData[t][row][5].replace('//', '/').trim();
 				var dateSplit = date.split("/");
 				var day = parseInt(dateSplit[0]);
 				var month = parseInt(dateSplit[1]);
