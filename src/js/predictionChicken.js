@@ -30,6 +30,17 @@ var getTeams = function(query, callback){
 	});
 }
 
+var getTeam = function(query, callback){
+	console.log(query)
+	dbManager.getTeams(query, function(teams){
+		//Assign rankings
+		var result = {};
+
+
+		callback(result)
+	});
+}
+
 //Query database and return a list of games
 var getGames = function(query, callback){
 	dbManager.getGames(query, function(results){
@@ -89,7 +100,9 @@ var getStats = function(query, callback){
 						weeklyCorrect[games[i].week] = weeklyCorrect[games[i].week] + 1;
 					}
 				}
-				marginDiff += Math.abs(games[i].prediction - (games[i].homeScore - games[i].awayScore));
+				if(Math.abs(games[i].prediction - (games[i].homeScore - games[i].awayScore))){
+					marginDiff += Math.abs(games[i].prediction - (games[i].homeScore - games[i].awayScore));
+				}
 			}
 		}
 		var labels = [];
@@ -247,6 +260,28 @@ var predictMargins = function(fixtures, teams){
 	//Update ratings and predictions
 	dbManager.updateTeams(teams);
 	dbManager.updateGames(fixtures);
+
+	findALoop(fixtures)
+}
+
+var findALoop = function(fixtures){
+	var map = {};
+	for(var i = 0; i < fixtures.length; i++){
+		if(fixtures[i].year != 2019){ continue; }
+		if(!(fixtures[i].home in map)){
+			map[fixtures[i].home] = [];
+		}
+		if(!(fixtures[i].away in map)){
+			map[fixtures[i].away] = [];
+		}
+		if(fixtures[i].awayScore > fixtures[i].homeScore){
+			map[fixtures[i].away].push(fixtures[i].home);
+		}
+		if(fixtures[i].awayScore < fixtures[i].homeScore){
+			map[fixtures[i].home].push(fixtures[i].away);
+		}
+	}
+	console.log(JSON.stringify(map, null, 2))
 }
 
 //Update the chicken. Scrape results then predict marings.

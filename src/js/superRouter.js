@@ -104,6 +104,22 @@ var route = function(){
 
 	});
 
+	//Render weekly games page for given week
+	router.route('/team/:name').get(function(req, res){
+		var team = req.params.name;
+		chicken.getTeam({code: team, tournament: "Super"}, function(res){
+			res.render('teamView', {
+				title: team.title,
+				// week: week,
+				// weeks: 19,
+				// playoffs: [{week: 19, label: "Quarter Finals"}, {week: 20, label: "Semi Finals"}, {week: 21, label: "Finals"}],
+				// games: games,
+				nav: nav
+			});
+		});
+
+	});
+
 	return router
 }
 

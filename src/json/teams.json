@@ -1,5 +1,6 @@
 [{
 	"team": "Waratahs",
+	"code": "waratahs",
 	"alias": [],
 	"colour": "#8ED8F8",
 	"conference": "Australia",
@@ -9,6 +10,7 @@
 },
 {
 	"team": "Sunwolves",
+	"code": "sunwolves",
 	"alias": [],
 	"colour": "#E60012",
 	"conference": "Australia",
@@ -18,6 +20,7 @@
 },
 {
 	"team": "Reds",
+	"code": "reds",
 	"alias": [],
 	"colour": "#D31245",
 	"conference": "Australia",
@@ -27,6 +30,7 @@
 },
 {
 	"team": "Melbourne Rebels",
+	"code": "rebels",
 	"alias": ["Rebels", "Melbourne\nRebels"],
 	"colour": "#6077A1",
 	"conference": "Australia",
@@ -36,6 +40,7 @@
 },
 {
 	"team": "Brumbies",
+	"code": "brumbies",
 	"alias": [],
 	"colour": "#002954",
 	"conference": "Australia",
@@ -45,6 +50,7 @@
 },
 {
 	"team": "Hurricanes",
+	"code": "hurricanes",
 	"alias": [],
 	"colour": "#FFDA01",
 	"conference": "New Zealand",
@@ -54,6 +60,7 @@
 },
 {
 	"team": "Highlanders",
+	"code": "highlanders",
 	"alias": [],
 	"colour": "#1B54A2",
 	"conference": "New Zealand",
@@ -63,6 +70,7 @@
 },
 {
 	"team": "Crusaders",
+	"code": "crusaders",
 	"alias": [],
 	"colour": "#E63531",
 	"conference": "New Zealand",
@@ -72,6 +80,7 @@
 },
 {
 	"team": "Chiefs",
+	"code": "chiefs",
 	"alias": ["Chiefs,"],
 	"colour": "#2F2C34",
 	"conference": "New Zealand",
@@ -82,6 +91,7 @@
 },
 {
 	"team": "Blues",
+	"code": "blues",
 	"alias": [],
 	"colour": "#7FBFE9",
 	"conference": "New Zealand",
@@ -91,6 +101,7 @@
 },
 {
 	"team": "Stormers",
+	"code": "stormers",
 	"alias": [],
 	"conference": "South Africa",
 	"country": "South Africa",
@@ -100,6 +111,7 @@
 },
 {
 	"team": "Sharks",
+	"code": "sharks",
 	"alias": [],
 	"conference": "South Africa",
 	"country": "South Africa",
@@ -109,6 +121,7 @@
 },
 {
 	"team": "Lions",
+	"code": "lions",
 	"alias": ["Cats"],
 	"conference": "South Africa",
 	"country": "South Africa",
@@ -118,6 +131,7 @@
 },
 {
 	"team": "Jaguares",
+	"code": "jaguares",
 	"alias": [],
 	"conference": "South Africa",
 	"country": "Argentina",
@@ -127,6 +141,7 @@
 },
 {
 	"team": "Bulls",
+	"code": "bulls",
 	"alias": [],
 	"conference": "South Africa",
 	"country": "South Africa",
@@ -136,6 +151,7 @@
 },
 {
 	"team": "Southern Kings",
+	"code": "kings",
 	"alias": ["Kings", "S.Kings", "Southern Kings"],
 	"country": "South Africa",
 	"tournament": "Super",
@@ -143,6 +159,7 @@
 },
 {
 	"team": "Cheetahs",
+	"code": "cheetahs",
 	"alias": ["Cheetahs,"],
 	"country": "South Africa",
 	"tournament": "Super",
@@ -150,6 +167,7 @@
 },
 {
 	"team": "Western Force",
+	"code": "force",
 	"alias": ["W. Force", "Force"],
 	"country": "Australia",
 	"tournament": "Super",
@@ -157,6 +175,7 @@
 },
 {
 	"team": "Canterbury",
+	"code": "canterbury",
 	"alias": [],
 	"conference": "Premiership",
 	"colour": "#DF1E25",
@@ -166,6 +185,7 @@
 },
 {
 	"team": "Counties Manukau",
+	"code": "counties",
 	"alias": ["Counties Man"],
 	"conference": "Premiership",
 	"colour": "#AA0009",
@@ -175,6 +195,7 @@
 },
 {
 	"team": "Taranaki",
+	"code": "taranaki",
 	"alias": [],
 	"conference": "Premiership",
 	"colour": "#FAB019",
@@ -184,6 +205,7 @@
 },
 {
 	"team": "Tasman",
+	"code": "tasman",
 	"alias": [],
 	"conference": "Premiership",
 	"colour": "#CC2043",
@@ -193,6 +215,7 @@
 },
 {
 	"team": "Waikato",
+	"code": "waikato",
 	"alias": [],
 	"conference": "Premiership",
 	"colour": "#FDD812",
@@ -202,6 +225,7 @@
 },
 {
 	"team": "Auckland",
+	"code": "auckland",
 	"alias": [],
 	"conference": "Premiership",
 	"colour": "#143269",
@@ -211,6 +235,7 @@
 },
 {
 	"team": "Bay of Plenty",
+	"code": "bayofplenty",
 	"alias": [],
 	"conference": "Championship",
 	"colour": "#29488A",
@@ -220,6 +245,7 @@
 },
 {
 	"team": "Wellington",
+	"code": "wellington",
 	"alias": [],
 	"conference": "Championship",
 	"colour": "#FFC100",
@@ -229,6 +255,7 @@
 },
 {
 	"team": "Manawatu",
+	"code": "manawatu",
 	"alias": [],
 	"conference": "Championship",
 	"colour": "#029850",
@@ -238,6 +265,7 @@
 },
 {
 	"team": "North Harbour",
+	"code": "northharbour",
 	"alias": ["North harbour"],
 	"conference": "Premiership",
 	"colour": "#9C003B",
@@ -247,6 +275,7 @@
 },
 {
 	"team": "Northland",
+	"code": "northland",
 	"alias": [],
 	"conference": "Championship",
 	"colour": "#9BB3D5",
@@ -256,6 +285,7 @@
 },
 {
 	"team": "Otago",
+	"code": "otago",
 	"alias": [],
 	"conference": "Championship",
 	"colour": "#0157A0",
@@ -265,6 +295,7 @@
 },
 {
 	"team": "Southland",
+	"code": "southland",
 	"alias": [],
 	"conference": "Championship",
 	"colour": "#79001F",
@@ -274,6 +305,7 @@
 },
 {
 	"team": "Hawke’s Bay",
+	"code": "hawkesbay",
 	"alias": ["Hawke's Bay"],
 	"conference": "Championship",
 	"colour": "#1C1C1C",
